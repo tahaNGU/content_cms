@@ -10,7 +10,7 @@ trait ResizeImage
     private $valid_extension=['jpeg','png','jpg','gif','webp'];
     public function resize_pic(object $filed, string $module, string $field_name)
     {
-//        try {
+        try {
             $resize_image = resize_image();
             $name = pathinfo($filed->getClientOriginalName(), PATHINFO_FILENAME);
             $extension=$filed->getClientOriginalExtension();
@@ -40,9 +40,18 @@ trait ResizeImage
                 'format' => $extension
             ]);
             return $module . "/" . $file_name;
-//        } catch (\Exception $exception) {
-//            DB::rollBack();
-//        }
+        } catch (\Exception $exception) {
+            DB::rollBack();
+        }
+    }
+
+    public function valid_name($module,$filed_name){
+        $file = request()->$filed_name ?? '';
+        if (is_object($file)) {
+            $file = $this->resize_pic(request()->$filed_name, $module, $filed_name);
+        }
+        return $file;
+
     }
 
 }

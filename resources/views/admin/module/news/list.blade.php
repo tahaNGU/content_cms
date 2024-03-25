@@ -42,7 +42,7 @@
                                                             <td>{{ $loop->iteration + $news->firstItem() - 1 }}
                                                             <td>{{$item["title"]}}</td>
                                                             <td>مدیر اصلی</td>
-                                                            <td>{{$item->news_cat->title}}</td>
+                                                            <td>{{$item->news_cat->title ?? ""}}</td>
                                                             <td><input type="text" value="{{$item["order"]}}" class="input-order" name="order[{{$item['id']}}]"></td>
                                                             <td>
                                                                 @component($prefix_component."state_style",['id'=>$item["id"],"column"=>'state','state'=>$item["state"]])@endcomponent
@@ -53,12 +53,8 @@
                                                             <td>{{$item->date_convert('validity_date')}}</td>
                                                             <td>{{$item->date_convert()}}</td>
                                                             <td>
-                                                                <a href="{{route("admin.news.edit",['news'=>$item['id']])}}"
-                                                                   class="btn btn-success btn-sm"><i
-                                                                        class="fas fa-edit"></i></a>
-                                                                <a href="javascript:void(0)"
-                                                                   data-href="{{route("admin.news.destroy",['news'=>$item['id']])}}"
-                                                                   class="btn btn-danger btn-sm delete">
+                                                                <a href="{{route("admin.news.edit",['news'=>$item['id']])}}" class="btn btn-success btn-sm"><i class="fas fa-edit"></i></a>
+                                                                <a href="javascript:void(0)" data-href="{{route("admin.news.destroy",['news'=>$item['id']])}}" class="btn btn-danger btn-sm delete">
                                                                     <i class="fas fa-trash"></i>
                                                                 </a>
                                                                 <a href="{{route("admin.content.create",['item_id'=>$item['id'],'module'=>'news'])}}" class="btn btn-primary btn-sm">افزودن محتوا
@@ -119,6 +115,4 @@
         </div>
     </section>
 @endsection
-@section("footer")
 
-@endsection

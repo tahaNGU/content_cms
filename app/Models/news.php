@@ -12,7 +12,7 @@ use Morilog\Jalali\Jalalian;
 
 class news extends Model
 {
-    use HasFactory, SoftDeletes, date_convert,morph_content;
+    use HasFactory, SoftDeletes, date_convert, morph_content;
 
     protected $appends = ['validate_date_admin'];
     protected $fillable = [
@@ -45,12 +45,11 @@ class news extends Model
     }
 
 
-
     public function getValidateDateAdminAttribute()
     {
         $validate_date_admin[0] = Jalalian::forge($this->validity_date)->format('Y/m/d');
-        $validate_date_admin[1] = (Jalalian::forge($this->validity_date)->format('H') == "00") ? "0" : Jalalian::forge($this->validity_date)->format('H');
-        $validate_date_admin[2] = (Jalalian::forge($this->validity_date)->format('i') == "00") ? "0" : Jalalian::forge($this->validity_date)->format('i');
+        $validate_date_admin[1] = ltrim(Jalalian::forge($this->validity_date)->format('H'), "0");
+        $validate_date_admin[2] = ltrim(Jalalian::forge($this->validity_date)->format('i'), "0");
         return $validate_date_admin;
     }
 
@@ -64,7 +63,6 @@ class news extends Model
         }
         return $builder;
     }
-
 
 
 }

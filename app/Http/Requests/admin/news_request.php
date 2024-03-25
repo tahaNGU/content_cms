@@ -22,7 +22,7 @@ class news_request extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $rules= [
             'seo_title' => ['required', 'string', 'min:1', 'max:255'],
             'seo_url' => ['required', 'string', 'min:1', 'max:255','unique:news,seo_url,'.$this->id],
             'seo_h1' => ['nullable', 'string', 'min:1', 'max:255'],
@@ -40,8 +40,14 @@ class news_request extends FormRequest
             'catid' => ['required', 'integer','exists:news_cats,id'],
             'note' => ['required', 'string', 'min:1', 'max:255'],
             'note_more' => ['required', 'string', 'min:1'],
-
         ];
+        if(is_string("pic") && in_array(pathinfo($this->pic,PATHINFO_EXTENSION),['jpeg','png','jpg','gif','svg','webp'])){
+            unset($rules['pic']);
+        }
+        if(is_string("pic_banner") && in_array(pathinfo($this->pic_banner,PATHINFO_EXTENSION),['jpeg','png','jpg','gif','svg','webp'])){
+            unset($rules['pic_banner']);
+        }
+        return $rules;
     }
     protected function prepareForValidation()
     {

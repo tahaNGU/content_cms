@@ -36,11 +36,11 @@ class news_controller extends Controller
      */
     public function index(Request $request)
     {
-        $news=news::with('news_cat')->filter($request->all())->paginate(4);
-        $news_cats_search=news_cat::with('sub_cats')->where('catid','0')->get();
+        $news = news::with('news_cat')->filter($request->all())->paginate(4);
+        $news_cats_search = news_cat::with('sub_cats')->where('catid', '0')->get();
         return view($this->view . "list", [
             'module_title' => $this->module_title,
-            'news_cats_search' =>$news_cats_search,
+            'news_cats_search' => $news_cats_search,
             'news' => $news
         ]);
     }
@@ -72,11 +72,11 @@ class news_controller extends Controller
         if (!empty($request->pic)) {
             $pic = $this->resize_pic($request->pic, $this->module, 'pic');
         }
-        $validity_date=Carbon::now()->format("Y/m/d");
+        $validity_date = Carbon::now()->format("Y/m/d");
 
         if (!empty($request->validity_date[0])) {
 
-            $validity_date=$this->convert_date_to_timestamp($request->validity_date);
+            $validity_date = $this->convert_date_to_timestamp($request->validity_date);
         }
 
         news::create([
@@ -126,19 +126,12 @@ class news_controller extends Controller
     public function update(news_request $request, news $news)
     {
         DB::beginTransaction();
-        $pic_banner = $news['pic_banner'];
-        if (!empty($request->pic_banner)) {
-            $pic_banner = $this->resize_pic($request->pic_banner, $this->module, 'pic_banner');
-        }
-        $pic = $news['pic'];
-        if (!empty($request->pic)) {
-            $pic = $this->resize_pic($request->pic, $this->module, 'pic');
-        }
+        $pic=$this->valid_name($this->module,'pic');
+        $pic_banner = $this->valid_name($this->module,'pic_banner');
 
-        $validity_date=Carbon::now()->format("Y/m/d");
+        $validity_date = Carbon::now()->format("Y/m/d");
         if (!empty($request->validity_date[0])) {
-
-            $validity_date=$this->convert_date_to_timestamp($request->validity_date);
+            $validity_date = $this->convert_date_to_timestamp($request->validity_date);
         }
         $news->update([
             'seo_title' => $request->seo_title,

@@ -1,4 +1,7 @@
 <?php
+
+use Illuminate\Support\Facades\DB;
+
 if (!function_exists('sluggableCustomSlugMethod')) {
 
     function sluggableCustomSlugMethod($string, $separator = '-')
@@ -82,27 +85,38 @@ if (!function_exists('formatSizeUnits')) {
 
 
 if (!function_exists('getMaxSize')) {
-    function getMaxSize($module,$filed_name)
+    function getMaxSize($module, $filed_name)
     {
         $sizes = resize_image()[$module][$filed_name];
         $minimums_size = '[]';
-        $width_max=0;
+        $width_max = 0;
         if (!empty($sizes)) {
             foreach ($sizes as $size) {
                 if (!empty($size)) {
                     foreach ($size as $width => $height) {
-                        if($width > $width_max){
-                            $width_max=$width;
-                            $minimums_size=sprintf("(%sx%s)",$width,$height);
+                        if ($width > $width_max) {
+                            $width_max = $width;
+                            $minimums_size = sprintf("(%sx%s)", $width, $height);
                         }
                     }
                 }
             }
         }
-        return (($minimums_size=="[]")?"":$minimums_size);
+        return (($minimums_size == "[]") ? "" : $minimums_size);
     }
 }
+if (!function_exists('to_english_numbers')) {
+    function to_english_numbers(string $string): string
+    {
+        $persinaDigits1 = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+        $persinaDigits2 = ['٩', '٨', '٧', '٦', '٥', '٤', '٣', '٢', '١', '٠'];
+        $allPersianDigits = array_merge($persinaDigits1, $persinaDigits2);
+        $replaces = [...range(0, 9), ...range(0, 9)];
+        $integer=str_replace($allPersianDigits, $replaces, $string);
 
+        return (int) $integer;
+    }
+}
 
 
 
