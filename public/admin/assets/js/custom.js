@@ -4,22 +4,39 @@
  * because it will make it harder for you to update.
  *
  */
-
 "use strict";
-
 $("#check_all").click(function () {
     $("table tbody .checkbox_item").prop('checked', $(this).prop('checked'));
 });
 
 
+
+
+function toaste(type_icon,msg,timer=1000){
+    const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: timer,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+        }
+    });
+    Toast.fire({
+        icon: type_icon,
+        title: msg
+    });
+}
 $(".delete").click(function () {
     var href = $(this).data("href")
     Swal.fire({
-        title: "آیا می خواهید حذف کنید؟",
+        title: messages['is_delete'],
         icon: "",
         iconHtml: '',
-        confirmButtonText: "بله",
-        cancelButtonText: "خیر",
+        confirmButtonText: messages["yes"],
+        cancelButtonText: messages["no"],
         showCancelButton: true,
         showCloseButton: true,
 
@@ -32,28 +49,13 @@ $(".delete").click(function () {
                     '_token': $("input[name='_token']").val(),
                 },
                 success: function (response) {
-                    const Toast = Swal.mixin({
-                        toast: true,
-                        position: "top-end",
-                        showConfirmButton: false,
-                        timer: 1000,
-                        timerProgressBar: true,
-                        didOpen: (toast) => {
-                            toast.onmouseenter = Swal.stopTimer;
-                            toast.onmouseleave = Swal.resumeTimer;
-                        }
-                    });
-                    Toast.fire({
-                        icon: "success",
-                        title: "حذف با موفقیت انجام شد"
-                    });
+                    toaste("success",messages['success_delete'])
                     setTimeout(function () {
-
                         location.reload();
                     }, 1000)
                 },
                 error: function () {
-                    alert("خظا در بر قراری ارتباط")
+                    toaste("error",messages['error_to_connecting'])
                 }
             });
         }
@@ -68,11 +70,11 @@ $("button[name='action_all']").click(function (e) {
     if ($(this).val() == "delete_all") {
         var href = $(this).data("href")
         Swal.fire({
-            title: "آیا می خواهید حذف کنید؟",
+            title: messages['is_delete'],
             icon: "",
             iconHtml: '',
-            confirmButtonText: "بله",
-            cancelButtonText: "خیر",
+            confirmButtonText: messages["yes"],
+            cancelButtonText: messages["no"],
             showCancelButton: true,
             showCloseButton: true,
 
@@ -85,44 +87,15 @@ $("button[name='action_all']").click(function (e) {
                     data: data,
                     success: function (res) {
                         if ($(res['errors']).length) {
-                            const Toast = Swal.mixin({
-                                toast: true,
-                                position: "top-end",
-                                showConfirmButton: false,
-                                timer: 2000,
-                                timerProgressBar: true,
-                                didOpen: (toast) => {
-                                    toast.onmouseenter = Swal.stopTimer;
-                                    toast.onmouseleave = Swal.resumeTimer;
-                                }
-                            });
-                            Toast.fire({
-                                icon: "error",
-                                title: "لطفا انتخاب کنید"
-                            });
+                            toaste("error",messages['choose'],2000)
                         } else {
                             setTimeout(function () {
-
                                 location.reload();
                             }, 1000)
                         }
                     },
                     error: function () {
-                        const Toast = Swal.mixin({
-                            toast: true,
-                            position: "top-end",
-                            showConfirmButton: false,
-                            timer: 2000,
-                            timerProgressBar: true,
-                            didOpen: (toast) => {
-                                toast.onmouseenter = Swal.stopTimer;
-                                toast.onmouseleave = Swal.resumeTimer;
-                            }
-                        });
-                        Toast.fire({
-                            icon: "error",
-                            title: "خطا در برقراری ارتباط"
-                        });
+                        toaste("error",messages['error_to_connecting'],2000)
                     }
                 })
             }
@@ -135,21 +108,7 @@ $("button[name='action_all']").click(function (e) {
             data: data,
             success: function (res) {
                 if ($(res['errors']).length) {
-                    const Toast = Swal.mixin({
-                        toast: true,
-                        position: "top-end",
-                        showConfirmButton: false,
-                        timer: 2000,
-                        timerProgressBar: true,
-                        didOpen: (toast) => {
-                            toast.onmouseenter = Swal.stopTimer;
-                            toast.onmouseleave = Swal.resumeTimer;
-                        }
-                    });
-                    Toast.fire({
-                        icon: "error",
-                        title: "لطفا انتخاب کنید"
-                    });
+                    toaste("error",messages['choose'],2000)
                 } else {
                     setTimeout(function () {
 
@@ -158,21 +117,7 @@ $("button[name='action_all']").click(function (e) {
                 }
             },
             error: function () {
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: "top-end",
-                    showConfirmButton: false,
-                    timer: 2000,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                        toast.onmouseenter = Swal.stopTimer;
-                        toast.onmouseleave = Swal.resumeTimer;
-                    }
-                });
-                Toast.fire({
-                    icon: "error",
-                    title: "خطا در برقراری ارتباط"
-                });
+                toaste("error",messages['error_to_connecting'],2000)
             }
         })
     }
@@ -181,9 +126,7 @@ $("button[name='action_all']").click(function (e) {
 
 
 $(".state_action").on('change', function () {
-    // var html = html("<button type='submit' name='action_all' value='change_order'></button>");
     $("[value='change_state_main']").trigger("click")
-
 })
 
 
@@ -196,9 +139,8 @@ $(".state_checkbox").on('change',function () {
         type: 'POST',
         dataType: 'json',
         data:{'item':$(this).attr("data-item"),'_token':$("[name='_token']").val(),'column_name':$(this).attr("data-column"),'action_type':'change_state_item'},
-
         error:function () {
-            alert("خطا در برقراری ارتباط")
+            toaste("error",messages['error_to_connecting'],2000)
         }
     })
 })

@@ -6,4 +6,7 @@
 <script src="{{asset("admin/assets/js/page/sweetalert.js")}}"></script>
 
 <script src="{{asset("admin/assets/js/scripts.js")}}"></script>
+<script>
+    var messages=@json(__("common.msg"));
+</script>
 <script src="{{asset("admin/assets/js/custom.js")}}"></script>
