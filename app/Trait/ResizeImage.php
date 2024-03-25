@@ -45,13 +45,12 @@ trait ResizeImage
         }
     }
 
-    public function valid_name($module,$filed_name){
+    public function upload_file($module,$filed_name){
         $file = request()->$filed_name ?? '';
         if (is_object($file)) {
             $file = $this->resize_pic(request()->$filed_name, $module, $filed_name);
         }
         return $file;
-
     }
 
 }

@@ -43,8 +43,6 @@ class news extends Model
     {
         return $this->belongsTo(news_cat::class, 'catid')->select("id", "title");
     }
-
-
     public function getValidateDateAdminAttribute()
     {
         $validate_date_admin[0] = Jalalian::forge($this->validity_date)->format('Y/m/d');

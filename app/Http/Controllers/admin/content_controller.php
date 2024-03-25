@@ -50,16 +50,14 @@ class content_controller extends Controller
         $video = '';
         $pic_video = '';
         if ($request->kind == "2") {
-            $pic = $this->resize_pic($request->pic, $this->module . "_" . $module, 'pic');
+            $pic=$this->upload_file($this->module . "_" . $module,'pic');
         }
         if ($request->kind == "4") {
-            $catalog = $this->resize_pic($request->catalog, $this->module . "_" . $module, 'catalog');
+            $catalog=$this->upload_file($this->module . "_" . $module,'catalog');
         }
         if ($request->kind == "5" && $request->is_aparat != "1") {
-            $video = $this->resize_pic($request->video, $this->module . "_" . $module, 'video');
-            if ($request->has("pic_video")) {
-                $pic_video = $this->resize_pic($request->pic_video, $this->module . "_" . $module, 'pic_video');
-            }
+            $video=$this->upload_file($this->module . "_" . $module,'video');
+            $pic_video=$this->upload_file($this->module . "_" . $module,'pic_video');
         }
         $contentable->content()->create([
             'title' => $request->title,
@@ -116,7 +114,7 @@ class content_controller extends Controller
 
     public function edit($item_id, $module)
     {
-        $content = content::where("id", $item_id)->where("admin_id", "1")->where("contentable_type", self::modal_content()[$module])->firstOrFail();
+        $content = content::where("id", $item_id)->where("contentable_type", self::modal_content()[$module])->where("admin_id", "1")->firstOrFail();
         return view($this->view . "edit", [
             'module_title' => $this->module_title,
             'item_id' => $item_id,
@@ -129,42 +127,25 @@ class content_controller extends Controller
     public function update(content_request $request, $item_id, $module)
     {
         DB::beginTransaction();
+        $content_item=content::where('kind',$request->kind)->where("admin_id", "1")->where("contentable_type", self::modal_content()[$module])->where('id',$item_id)->firstOrFail();
         $pic = '';
         $catalog = '';
         $video = '';
         $pic_video = '';
-        if ($request->kind == "2") {
-            if (is_object($request->pic)) {
-                $pic = $this->resize_pic($request->pic, $this->module . "_" . $module, 'pic');
-            } else {
-                $pic = $request->pic;
-            }
+        if ($content_item['kind'] == "2") {
+            $pic=$this->upload_file($this->module . "_" . $module,'pic');
         }
-        if ($request->kind == "4") {
-            if (is_object($request->catalog)) {
-                $catalog = $this->resize_pic($request->catalog, $this->module . "_" . $module, 'catalog');
-            } else {
-                $catalog = $request->catalog;
-            }
+        if ($content_item['kind'] == "4") {
+            $catalog=$this->upload_file($this->module . "_" . $module,'catalog');
         }
-        if ($request->kind == "5" && $request->is_aparat != "1") {
+        if ($content_item['kind'] == "5" && $request->is_aparat != "1") {
             $request->note_more="";
-            if (is_object($request->video)) {
-                $video = $this->resize_pic($request->video, $this->module . "_" . $module, 'video');
-            } else {
-                $video = $request->video;
-            }
-            if ($request->has("pic_video")) {
-                if (is_object($request->pic_video)) {
-                    $pic_video = $this->resize_pic($request->pic_video, $this->module . "_" . $module, 'pic_video');
-                }else{
-                    $pic_video=$request->pic_video;
-                }
-            }
+            $video=$this->upload_file($this->module . "_" . $module,'video');
+            $pic_video=$this->upload_file($this->module . "_" . $module,'pic_video');
         }
+
         content::find($item_id)->update([
             'title' => $request->title,
-            'kind' => $request->kind,
             'note' => $request->note,
             'pic' => $pic,
             'is_aparat' => $request->is_aparat,

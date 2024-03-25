@@ -37,7 +37,7 @@ class news_controller extends Controller
     public function index(Request $request)
     {
         $news = news::with('news_cat')->filter($request->all())->paginate(4);
-        $news_cats_search = news_cat::with('sub_cats')->where('catid', '0')->get();
+        $news_cats_search = news_cat::with(['sub_cats'])->where('catid', '0')->get();
         return view($this->view . "list", [
             'module_title' => $this->module_title,
             'news_cats_search' => $news_cats_search,
@@ -64,21 +64,13 @@ class news_controller extends Controller
     public function store(news_request $request)
     {
         DB::beginTransaction();
-        $pic_banner = '';
-        if (!empty($request->pic_banner)) {
-            $pic_banner = $this->resize_pic($request->pic_banner, $this->module, 'pic_banner');
-        }
-        $pic = '';
-        if (!empty($request->pic)) {
-            $pic = $this->resize_pic($request->pic, $this->module, 'pic');
-        }
+
+        $pic=$this->upload_file($this->module,'pic');
+        $pic_banner = $this->upload_file($this->module,'pic_banner');
         $validity_date = Carbon::now()->format("Y/m/d");
-
         if (!empty($request->validity_date[0])) {
-
             $validity_date = $this->convert_date_to_timestamp($request->validity_date);
         }
-
         news::create([
             'seo_title' => $request->seo_title,
             'seo_url' => $request->seo_url,
@@ -126,9 +118,8 @@ class news_controller extends Controller
     public function update(news_request $request, news $news)
     {
         DB::beginTransaction();
-        $pic=$this->valid_name($this->module,'pic');
-        $pic_banner = $this->valid_name($this->module,'pic_banner');
-
+        $pic=$this->upload_file($this->module,'pic');
+        $pic_banner = $this->upload_file($this->module,'pic_banner');
         $validity_date = Carbon::now()->format("Y/m/d");
         if (!empty($request->validity_date[0])) {
             $validity_date = $this->convert_date_to_timestamp($request->validity_date);

@@ -35,32 +35,18 @@
                                                     <tbody>
                                                     @foreach($news_cats as $news_cat)
                                                         <tr>
-                                                            <th scope="row"><input type="checkbox" name="item[]" value="{{$news_cat['id']}}"></th>
+                                                            <th scope="row"><input type="checkbox" name="item[]" class="checkbox_item" value="{{$news_cat['id']}}"></th>
                                                             <td>{{ $loop->iteration + $news_cats->firstItem() - 1 }}
                                                             </td>
                                                             <td>{{$news_cat["title"]}}</td>
-                                                            <td>0</td>
-                                                            <td>
-                                                                @component($prefix_component."state_style",['id'=>$news_cat["id"],"column"=>'state','state'=>$news_cat["state"]])@endcomponent
-
-                                                            </td>
-
-                                                            <td><input type="text" value="{{$news_cat["order"]}}"
-                                                                       class="input-order" name="order[{{$news_cat['id']}}]"></td>
+                                                            <td><a href="{{route("admin.news.index",['catid'=>$news_cat['id']])}}">{{$news_cat->news->count('id')}}</a></td>
+                                                            <td>@component($prefix_component."state_style",['id'=>$news_cat["id"],"column"=>'state','state'=>$news_cat["state"]])@endcomponent</td>
+                                                            <td><input type="text" value="{{$news_cat["order"]}}" class="input-order" name="order[{{$news_cat['id']}}]"></td>
                                                             <td>{{$news_cat->date_convert()}}</td>
                                                             <td>
-                                                                <a href="{{route("admin.news_cat.edit",['news_cat'=>$news_cat['id']])}}"
-                                                                   class="btn btn-success btn-sm"><i
-                                                                        class="fas fa-edit"></i></a>
-                                                                <a href="javascript:void(0)"
-                                                                   data-href="{{route("admin.news_cat.destroy",['news_cat'=>$news_cat['id']])}}"
-                                                                   class="btn btn-danger btn-sm delete">
-                                                                    <i class="fas fa-trash"></i>
-                                                                </a>
-                                                                <a href="?catid={{$news_cat['id']}}"
-                                                                   class="btn btn-primary btn-sm">زیر بخش
-                                                                    :<span
-                                                                        class="badge badge-transparent">{{$news_cat->sub_cats()->count()}}</span></a>
+                                                                <a href="{{route("admin.news_cat.edit",['news_cat'=>$news_cat['id']])}}" class="btn btn-success btn-sm"><i class="fas fa-edit"></i></a>
+                                                                <a href="javascript:void(0)" data-href="{{route("admin.news_cat.destroy",['news_cat'=>$news_cat['id']])}}" class="btn btn-danger btn-sm delete"><i class="fas fa-trash"></i></a>
+                                                                <a href="?catid={{$news_cat['id']}}" class="btn btn-primary btn-sm">زیر بخش :<span class="badge badge-transparent">{{$news_cat->sub_cats()->count()}}</span></a>
                                                             </td>
                                                         </tr>
                                                     @endforeach

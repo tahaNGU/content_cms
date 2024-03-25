@@ -4,6 +4,7 @@
     {{$module_name}}
 @endsection
 @section("content")
+
     <section class="section">
         <div class="section-body">
             <div class="row">
@@ -11,7 +12,8 @@
                     <div class="card">
                         <div class="card-header d-flex justify-content-between  ">
                             <h4>{{$module_name}}</h4>
-                            <a href="{{route("admin.content.list",['item_id'=>$content["contentable_id"],'module'=>$module_type])}}" class="btn btn-primary btn-sm">لیست محتوا</a>
+                            <a href="{{route("admin.content.list",['item_id'=>$content["contentable_id"],'module'=>$module_type])}}"
+                               class="btn btn-primary btn-sm">لیست محتوا</a>
                         </div>
                         <div class="card-body">
                             @component($prefix_component."form",['action'=>route('admin.content.update',['item_id'=>$item_id,'module'=>$module_type]),'upload_file'=>true])
@@ -38,17 +40,17 @@
     </section>
 
 @endsection
+
 @section("footer")
     <script>
         $(".kind_item").addClass("d-none")
-        $("[name='is_aparat']").on('change',function () {
+        $("[name='is_aparat']").on('change', function () {
             $(".video").removeClass("d-none d-block")
             $(".aparat").removeClass("d-none d-block")
-            if(this.checked){
+            if (this.checked) {
                 $(".video").addClass("d-none")
                 $(".aparat").addClass("d-block")
-            }
-            else{
+            } else {
                 $(".video").addClass("d-block")
                 $(".aparat").addClass("d-none")
             }
@@ -60,11 +62,10 @@
                 $(".video").removeClass("d-none d-block")
                 $(".aparat").removeClass("d-none d-block")
 
-                if("{{$content["is_aparat"]}}" == "1"){
+                if ("{{$content["is_aparat"]}}" == "1") {
                     $(".video").addClass("d-none")
                     $(".aparat").addClass("d-block")
-                }
-                else{
+                } else {
                     $(".video").addClass("d-block")
                     $(".aparat").addClass("d-none")
                 }
@@ -77,4 +78,17 @@
             $(".kind_" + kind).removeClass("d-none")
         </script>
     @endif
+    @foreach(__("common.content." . $module_type) as $key => $value)
+        @if($key != $content["kind"])
+            <script>
+                if (!$(".kind_{{$key}}").hasClass("kind_" + "{{$content["kind"]}}")) {
+                    if ("{{$content["kind"]}}" == "5") {
+                        !$(".kind_{{$key}}").hasClass("aparat") ?? $(".kind_{{$key}}").remove()
+                    } else {
+                        $(".kind_{{$key}}").remove()
+                    }
+                }
+            </script>
+        @endif
+    @endforeach
 @endsection

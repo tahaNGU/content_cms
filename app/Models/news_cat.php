@@ -43,4 +43,9 @@ class news_cat extends Model
         }
         return $builder;
     }
+
+
+    public function news(){
+        return $this->hasMany(news::class,'catid');
+    }
 }

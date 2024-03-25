@@ -43,7 +43,7 @@
                                                             <td>{{ $loop->iteration + $content->firstItem() - 1 }}
                                                             <td>{{ $item['title'] }}</td>
                                                             <td>مدیر اصلی</td>
-                                                            <td>{{ __("common.content.".$module_type)[$item["kind"]] }}</td>
+                                                            <td>{{ __("common.content.".$module_type)[$item["kind"]] ?? "-" }}</td>
                                                             <td><input type="text" value="{{$item["order"]}}" class="input-order" name="order[{{$item['id']}}]"></td>
                                                             <td>
                                                                 @component($prefix_component."state_style",['id'=>$item["id"],"column"=>'state','state'=>$item["state"]])@endcomponent

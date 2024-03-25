@@ -42,6 +42,9 @@ class news_cat_request extends FormRequest
                 $rules['catid']=[new subid_in_catid($this->catid)];
             }
         }
+        if(is_string("pic_banner") && in_array(pathinfo($this->pic_banner,PATHINFO_EXTENSION),['jpeg','png','jpg','gif','svg','webp'])){
+            unset($rules['pic_banner']);
+        }
 
         return $rules;
     }

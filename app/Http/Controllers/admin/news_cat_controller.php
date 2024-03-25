@@ -31,7 +31,7 @@ class news_cat_controller extends Controller
      */
     public function index(Request $request)
     {
-        $news_cats = news_cat::filter($request->all())->with('sub_cats')->paginate(5)->withQueryString();
+        $news_cats = news_cat::filter($request->all())->with(['sub_cats','news'])->orderBy('id','desc')->paginate(5)->withQueryString();
         $news_cats_search = news_cat::where("catid", "0")->with("sub_cats")->get();
         return view($this->view . "list", [
             'news_cats' => $news_cats,
@@ -59,10 +59,7 @@ class news_cat_controller extends Controller
     public function store(news_cat_request $request)
     {
         DB::beginTransaction();
-        $pic_banner = '';
-        if (!empty($request->pic_banner)) {
-            $pic_banner = $this->resize_pic($request->pic_banner, $this->module, 'pic_banner');
-        }
+        $pic_banner=$this->upload_file($this->module,'pic_banner');
         news_cat::create([
             'seo_title' => $request->seo_title,
             'seo_url' => $request->seo_url,
@@ -107,13 +104,7 @@ class news_cat_controller extends Controller
     public function update(news_cat_request $request, news_cat $news_cat)
     {
         DB::beginTransaction();
-        $pic_banner = $news_cat['pic_banner'];
-        if (is_object($request->pic_banner)) {
-
-            if (!empty($request->pic_banner)) {
-                $pic_banner = $this->resize_pic($request->pic_banner, $this->module, 'pic_banner');
-            }
-        }
+        $pic_banner=$this->upload_file($this->module,'pic_banner');
         $news_cat->update([
             'seo_title' => $request->seo_title,
             'seo_url' => $request->seo_url,
