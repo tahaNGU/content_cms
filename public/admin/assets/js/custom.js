@@ -144,3 +144,34 @@ $(".state_checkbox").on('change',function () {
         }
     })
 })
+
+
+
+
+
+
+function change_province(url,val_province){
+    $.ajax({
+        url: url,
+        method: "post",
+        dataType: "json",
+        data: {
+            '_token': $("input[name='_token']").val(),
+            'province_id': val_province
+        },
+        success: function (result) {
+            $("[name='city'] option").remove()
+            if (result.length > 0) {
+                $(result).each(function (index, element) {
+                    $("[name='city']").append("<option value=" + element['id'] + ">" + element['name'] + "</option>")
+                })
+                $("[name='city']").prepend("<option selected value=''>انتخاب کنید</option>")
+            } else {
+                $("[name='city']").append("<option value=''>نتیجه ای یافت نشد</option>")
+            }
+        },
+        error: function () {
+            toaste("error", "خطا در برقراری ارتباط")
+        }
+    })
+}

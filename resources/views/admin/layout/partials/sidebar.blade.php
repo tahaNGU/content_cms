@@ -10,12 +10,26 @@
                 <img alt="تصویر" src="{{asset("admin/assets/img/userbig.png")}}">
             </div>
             <div class="sidebar-user-details">
-                <div class="user-name">سارا اسمیت</div>
+                <div class="user-name">{{auth()->user()->fullname}}</div>
                 <div class="user-role">مدیر</div>
             </div>
         </div>
         <ul class="sidebar-menu">
             <li class="menu-header">اصلی</li>
+            <li class="dropdown">
+                <a href="#" class="nav-link has-dropdown"><i data-feather="user"></i><span>گروه دسترسی مدیران</span></a>
+                <ul class="dropdown-menu">
+                    <li><a class="nav-link" href="{{route('admin.permission.create')}}">گروه دسترسی جدید</a></li>
+                    <li><a class="nav-link" href="{{route('admin.permission.index')}}">لیست گروه دسترسی</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="nav-link has-dropdown"><i data-feather="user"></i><span>مدیران</span></a>
+                <ul class="dropdown-menu">
+                    <li><a class="nav-link" href="{{route("admin.manager.create")}}">مدیر جدید</a></li>
+                    <li><a class="nav-link" href="{{route("admin.manager.index")}}">لیست مدیران</a></li>
+                </ul>
+            </li>
             <li class="dropdown">
                 <a href="#" class="nav-link has-dropdown"><i data-feather="monitor"></i><span>دسته بندی اخبار</span></a>
                 <ul class="dropdown-menu">

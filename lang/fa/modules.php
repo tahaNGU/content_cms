@@ -5,6 +5,8 @@ return [
         'news_cat' => 'دسته بندی خبر',
         'news' => 'خبر',
         'content' => 'محتوی',
+        'manager' => 'مدیران',
+        'permission' => 'گروه دسترسی',
     ],
 
 ];

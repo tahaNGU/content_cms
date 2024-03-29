@@ -22,6 +22,7 @@
                                     @component($prefix_component."input",['name'=>'title','title'=>'عنوان','value'=>$content["title"],'class'=>'w-50'])@endcomponent
                                     @component($prefix_component."textarea",['name'=>'note','class'=>'kind_item kind_1 kind_6','title'=>'متن','value'=>$content["note"]])@endcomponent
                                     @component($prefix_component."upload_file",['name'=>'pic','value'=>$content["pic"],'title'=>'تصویر','class'=>'w-50 kind_item kind_2','module'=>$module."_".$module_type])@endcomponent
+                                    @component($prefix_component."upload_file",['name'=>'pics','value'=>$content["pic"],'title'=>'تصویر چندتایی','class'=>'w-50 kind_item kind_3','module'=>$module."_".$module_type])@endcomponent
                                     @component($prefix_component."upload_file",['name'=>'catalog','value'=>$content["catalog"],'title'=>'کاتالوگ','class'=>'w-50 kind_item kind_4','module'=>false])@endcomponent
                                     @component($prefix_component."upload_file",['name'=>'pic_video','value'=>$content["pic_video"],'title'=>'کاور ویدیو','class'=>'w-50 kind_item kind_5 video','module'=>false])@endcomponent
                                     @component($prefix_component."upload_file",['name'=>'video','value'=>$content["video"],'title'=>'ویدیو','class'=>'w-50 kind_item kind_5 video','module'=>false])@endcomponent

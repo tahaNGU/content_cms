@@ -35,3 +35,7 @@ div:where(.swal2-container) h2:where(.swal2-title){
 .select2-container--default .select2-selection--single .select2-selection__arrow b{
     left: 11px !important;
 }
+
+.select2-container--default[dir="rtl"] .select2-selection--multiple .select2-selection__choice, .select2-container--default[dir="rtl"] .select2-selection--multiple .select2-selection__placeholder, .select2-container--default[dir="rtl"] .select2-selection--multiple .select2-search--inline {
+    color: #6c757d;
+}

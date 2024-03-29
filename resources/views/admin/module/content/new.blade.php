@@ -20,6 +20,7 @@
                                     @component($prefix_component."select",['name'=>'kind','title'=>'نوع','class'=>'w-50','items'=>$content_kind,'value_old'=>old('kind')])@endcomponent
                                     @component($prefix_component."textarea",['name'=>'note','class'=>'kind_item kind_1 kind_6','title'=>'متن','value'=>old('note')])@endcomponent
                                     @component($prefix_component."upload_file",['name'=>'pic','title'=>'تصویر','class'=>'w-50 kind_item kind_2','module'=>$module."_".$module_type])@endcomponent
+                                    @component($prefix_component."upload_multiple",['name'=>'pics','title'=>'تصویر چند تایی','class'=>'w-50 kind_item kind_3','module'=>$module."_".$module_type])@endcomponent
                                     @component($prefix_component."upload_file",['name'=>'catalog','title'=>'کاتالوگ','class'=>'w-50 kind_item kind_4','module'=>false])@endcomponent
                                     @component($prefix_component."upload_file",['name'=>'pic_video','title'=>'کاور ویدیو','class'=>'w-50 kind_item kind_5 video','module'=>false])@endcomponent
                                     @component($prefix_component."upload_file",['name'=>'video','title'=>'ویدیو','class'=>'w-50 kind_item kind_5 video','module'=>false])@endcomponent

@@ -50,26 +50,40 @@ class content_controller extends Controller
         $video = '';
         $pic_video = '';
         if ($request->kind == "2") {
-            $pic=$this->upload_file($this->module . "_" . $module,'pic');
+            $pic = $this->upload_file($this->module . "_" . $module, 'pic');
         }
         if ($request->kind == "4") {
-            $catalog=$this->upload_file($this->module . "_" . $module,'catalog');
+            $catalog = $this->upload_file($this->module . "_" . $module, 'catalog');
         }
         if ($request->kind == "5" && $request->is_aparat != "1") {
-            $video=$this->upload_file($this->module . "_" . $module,'video');
-            $pic_video=$this->upload_file($this->module . "_" . $module,'pic_video');
+            $video = $this->upload_file($this->module . "_" . $module, 'video');
+            $pic_video = $this->upload_file($this->module . "_" . $module, 'pic_video');
         }
-        $contentable->content()->create([
-            'title' => $request->title,
-            'kind' => $request->kind,
-            'note' => $request->note,
-            'pic' => $pic,
-            'is_aparat' => $request->is_aparat,
-            'catalog' => $catalog,
-            'video' => $video,
-            'pic_video' => $pic_video,
-            'note_more' => $request->note_more,
-        ]);
+
+        if ($request->kind == "3") {
+            foreach ($request->pics as $key => $value){
+                $pic = $this->upload_multiple_file($this->module . "_" . $module, 'pics',$key);
+                $contentable->content()->create([
+                    'title' => $request->title,
+                    'kind' => $request->kind,
+                    'pic' => $pic,
+                ]);
+            }
+        }else{
+            $contentable->content()->create([
+                'title' => $request->title,
+                'kind' => $request->kind,
+                'note' => $request->note,
+                'pic' => $pic,
+                'is_aparat' => $request->is_aparat,
+                'catalog' => $catalog,
+                'video' => $video,
+                'pic_video' => $pic_video,
+                'note_more' => $request->note_more,
+            ]);
+        }
+
+
         DB::commit();
         return back()->with('success', __('common.messages.success', [
             'module' => $this->module_title
@@ -127,23 +141,25 @@ class content_controller extends Controller
     public function update(content_request $request, $item_id, $module)
     {
         DB::beginTransaction();
-        $content_item=content::where('kind',$request->kind)->where("admin_id", "1")->where("contentable_type", self::modal_content()[$module])->where('id',$item_id)->firstOrFail();
+        $content_item = content::where('kind', $request->kind)->where("admin_id", "1")->where("contentable_type", self::modal_content()[$module])->where('id', $item_id)->firstOrFail();
         $pic = '';
         $catalog = '';
         $video = '';
         $pic_video = '';
         if ($content_item['kind'] == "2") {
-            $pic=$this->upload_file($this->module . "_" . $module,'pic');
+            $pic = $this->upload_file($this->module . "_" . $module, 'pic');
+        }
+        if ($content_item['kind'] == "3") {
+            $pic = $this->upload_file($this->module . "_" . $module, 'pics');
         }
         if ($content_item['kind'] == "4") {
-            $catalog=$this->upload_file($this->module . "_" . $module,'catalog');
+            $catalog = $this->upload_file($this->module . "_" . $module, 'catalog');
         }
         if ($content_item['kind'] == "5" && $request->is_aparat != "1") {
-            $request->note_more="";
-            $video=$this->upload_file($this->module . "_" . $module,'video');
-            $pic_video=$this->upload_file($this->module . "_" . $module,'pic_video');
+            $request->note_more = "";
+            $video = $this->upload_file($this->module . "_" . $module, 'video');
+            $pic_video = $this->upload_file($this->module . "_" . $module, 'pic_video');
         }
-
         content::find($item_id)->update([
             'title' => $request->title,
             'note' => $request->note,

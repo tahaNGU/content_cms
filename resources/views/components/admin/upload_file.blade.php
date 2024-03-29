@@ -3,7 +3,6 @@
 <div class="form-group {{$class}}">
     <label for="{{$name}}">@if(!$module) {{$title}} @else {{$title}} {{getMaxSize($module,$name)}} @endif</label>
     <div class="d-flex">
-
         <input type="file" id="{{$name}}" name="{{$name}}" class="form-control">
         @if(!empty($value) && in_array(pathinfo($value,PATHINFO_EXTENSION),['jpeg','png','jpg','gif','svg','webp']))
             <img src="{{asset('upload/'.$value)}}"

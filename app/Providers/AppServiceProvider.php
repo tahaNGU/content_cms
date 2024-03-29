@@ -16,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        View::composer(['admin.module.*','components.admin.*'], function($view) {
+        View::composer(['admin.*','components.admin.*'], function($view) {
             $view->with([
                 'prefix_component' => 'components.admin.',
             ]);
