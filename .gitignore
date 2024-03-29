@@ -7,6 +7,7 @@
 /storage/*.key
 /vendor
 .env
+databse.zip
 .env.backup
 .env.production
 Homestead.json
