@@ -25,12 +25,6 @@ Route::middleware("auth:admin")->group(function () {
     Route::post("manager/action_all", [manager_controller::class, "action_all"])->name("manager.action_all");
     Route::resource("permission", permission_controller::class)->except("show");
     Route::post("permission/action_all", [permission_controller::class, "action_all"])->name("permission.action_all");
-
-
-
-
-
-
     Route::prefix("content/{item_id}/{module}/")->as("content.")->group(function () {
         Route::get("create", [content_controller::class, 'create'])->name("create");
         Route::post("store", [content_controller::class, 'store'])->name("store");
