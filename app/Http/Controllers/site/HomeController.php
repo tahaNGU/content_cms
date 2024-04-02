@@ -11,7 +11,7 @@ class HomeController extends Controller
 {
     public function main()
     {
-        $news = news::where('state_main', '1')->where('state', '1')->where('validity_date', '<=', Carbon::now()->format('Y/m/d H:i:s'))->orderBy('order', 'desc')->with(['news_cat'])->limit('5')->get(['title', 'note', 'pic', 'catid']);
+        $news = news::where('state_main', '1')->where('state', '1')->where('validity_date', '<=', Carbon::now()->format('Y/m/d H:i:s'))->orderBy('order', 'desc')->with(['news_cat'])->limit('5')->get(['title', 'note', 'pic', 'catid','validity_date']);
         return view('site.main', compact('news'));
     }
 }

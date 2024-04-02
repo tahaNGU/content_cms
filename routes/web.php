@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\site\newsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,5 +17,9 @@ use Illuminate\Support\Facades\Route;
 
 //require __DIR__.'/auth.php';
 
-Route::get('main',[\App\Http\Controllers\site\HomeController::class,'main']);
+Route::get('main', [\App\Http\Controllers\site\HomeController::class, 'main']);
+Route::prefix('/news')->as('news.')->group(function () {
+    Route::get('/', [newsController::class, 'index'])->name('_index');
+    Route::get('/cat/{news_cat:seo_url}', [newsController::class, 'index'])->name('index');
+});
 
