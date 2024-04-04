@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Trait\date_convert;
 use App\Trait\morph_content;
+use App\Trait\seo;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -14,9 +15,9 @@ use Morilog\Jalali\Jalalian;
 
 class news extends Model
 {
-    use HasFactory, SoftDeletes, date_convert, morph_content;
+    use HasFactory, SoftDeletes, date_convert, morph_content,seo;
 
-    protected $appends = ['validate_date_admin', 'short_note', 'alt_image'];
+    protected $appends = ['validate_date_admin', 'short_note', 'alt_image','url'];
     protected $fillable = [
         'seo_title',
         'seo_url',
@@ -60,7 +61,7 @@ class news extends Model
             $builder->where("catid", $params['catid']);
         }
         if (!empty($params['title'])) {
-            $builder->where('title', 'like', '%' . $params["title"] . '%');
+            $builder->where('title', 'like', '%' . request()->get('keyword') . '%');
         }
         return $builder;
     }
@@ -76,11 +77,19 @@ class news extends Model
         return !empty($this->alt_pic) ? $this->alt_pic : $this->title;
     }
 
+    public function getUrlAttribute(){
+        return route('news.show',['news'=>$this->seo_url]);
+    }
     public function scopeSiteFilter(Builder $builder)
     {
-        $builder->where('state', '1')->where('validity_date', '<=', Carbon::now()->format('Y/m/d H:i:s'))->orderByRaw("`order` ASC, `id` DESC")->with(['news_cat'])->select(['title', 'note', 'pic', 'catid', 'validity_date', 'alt_pic']);
+        $builder->where('state', '1')->where('validity_date', '<=', Carbon::now()->format('Y/m/d H:i:s'))->orderByRaw("`order` ASC, `id` DESC")->with(['news_cat'])->select(['title', 'note', 'pic', 'catid', 'validity_date', 'alt_pic','seo_url']);
         if (!empty(request()->has('keyword'))) {
-            $builder->where('title', 'like', '%' . request()->get('keyword') . '%');
+            $builder->where('title', 'like', '%' . request()->get('keyword') . '%')
+                ->orWhere('seo_keyword', 'LIKE', '%'.request()->get('keyword') .'%')
+                ->orWhere('seo_description', 'LIKE', '%'.request()->get('keyword') .'%')
+                ->orWhere('note', 'LIKE', '%'.request()->get('keyword') .'%')
+                ->orWhere('note_more', 'LIKE', '%'.request()->get('keyword') .'%');
+            ;
         }
         return $builder;
     }

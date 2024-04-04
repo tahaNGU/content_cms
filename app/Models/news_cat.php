@@ -3,14 +3,19 @@
 namespace App\Models;
 
 use App\Trait\date_convert;
+use App\Trait\seo;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Route;
+
 
 class news_cat extends Model
 {
-    use HasFactory,SoftDeletes,date_convert;
+    use HasFactory,SoftDeletes,date_convert,seo;
+    protected $appends=['url'];
     protected $fillable=[
         'seo_title',
         'seo_url',
@@ -28,10 +33,14 @@ class news_cat extends Model
         'order',
         'state',
     ];
+
     public function sub_cats(){
         return $this->hasMany(news_cat::class,'catid')->with('sub_cats')->select("id","title","catid");
     }
 
+    public function __parent(){
+        return $this->belongsTo(news_cat::class,'catid')->where('state','1');
+    }
     public function scopeFilter(Builder $builder , $params){
         if(!empty($params['catid'])){
             $builder->where("catid",$params["catid"]);
@@ -48,4 +57,12 @@ class news_cat extends Model
     public function news(){
         return $this->hasMany(news::class,'catid');
     }
+
+
+    public function getUrlAttribute(){
+        return route('news.index_cat',['news_cat'=>$this->seo_url]);
+    }
+
+
+
 }

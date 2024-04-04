@@ -112,9 +112,27 @@ if (!function_exists('to_english_numbers')) {
         $persinaDigits2 = ['٩', '٨', '٧', '٦', '٥', '٤', '٣', '٢', '١', '٠'];
         $allPersianDigits = array_merge($persinaDigits1, $persinaDigits2);
         $replaces = [...range(0, 9), ...range(0, 9)];
-        $integer=str_replace($allPersianDigits, $replaces, $string);
+        $integer = str_replace($allPersianDigits, $replaces, $string);
 
-        return (int) $integer;
+        return (int)$integer;
+    }
+}
+if (!function_exists('breadcrumb')) {
+    function breadcrumb($model, $breadcrumb = '')
+    {
+//        if (empty($breadcrumb)) {
+//            $breadcrumb .= "<li><a href='/main'>صفحه اصلی</a></li>";
+//        }
+//        dump($model->parent);
+//        if (isset($model->parent)) {
+//            $breadcrumb .= "<li><a href=''>" . $model->parent->title . "</a></li>";
+//
+//            breadcrumb($model->parent, $breadcrumb);
+//        }
+//        $breadcrumb .= "<li><a href=''>" . $model['title'] . "</a></li>";
+
+//        dd($breadcrumb);
+//        return $breadcrumb;
     }
 }
 
@@ -122,6 +140,16 @@ if (!function_exists('to_english_numbers')) {
 
 
 
-
-
+//       if (empty($breadcrumb)) {
+//            $breadcrumb = "<ul class='bread-crumb'>";
+//            $breadcrumb .= "<li><a href='/main'>صفحه اصلی</a></li>";
+//            $breadcrumb .= "<li><a href=''>" . $model['title'] . "</a></li>";
+//        }
+//        if (isset($model->$method_name)) {
+//            $breadcrumb .= "<li><a href=''>" . $model->$method_name->title . "</a></li>";
+//            breadcrumb($model->$method_name, $method_name, $breadcrumb);
+//        }else{
+//            $breadcrumb .= "<ul/>";
+//           return $breadcrumb;
+//        }
 

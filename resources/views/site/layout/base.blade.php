@@ -11,5 +11,10 @@
 @include("site.layout.partials.modal")
 @include('site.layout.partials.footer_js')
 @yield('footer')
+<script>
+    $(document).ready(function(){
+        $('body').persiaNumber();
+    });
+</script>
 </body>
 </html>

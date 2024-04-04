@@ -8,5 +8,8 @@ return [
         'manager' => 'مدیران',
         'permission' => 'گروه دسترسی',
     ],
+    'module_name_site' => [
+        'news' => 'اخبار',
 
+    ],
 ];
