@@ -30,7 +30,7 @@
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="#"><i class="fi fi-rr-sign-in icon"></i>ورود</a></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#"><i class="fi fi-rr-user-add icon"></i>ثبت نام</a></li>
+                                <li><a class="dropdown-item" href="{{route('auth.register')}}"><i class="fi fi-rr-user-add icon"></i>ثبت نام</a></li>
                             </ul>
                         </div>
                     </div>

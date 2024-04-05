@@ -15,12 +15,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//require __DIR__.'/auth.php';
+require __DIR__.'/auth.php';
 
 Route::get('main', [\App\Http\Controllers\site\HomeController::class, 'main'])->name('main');
 Route::prefix('/news')->as('news.')->group(function () {
     Route::get('/', [newsController::class, 'index'])->name('index');
     Route::get('/cat/{news_cat:seo_url}', [newsController::class, 'index'])->name('index_cat');
     Route::get('/{news:seo_url}',[newsController::class,'show'])->name('show');
+    Route::post('/news_send_email/{id}',[newsController::class,'mail'])->name('mail');
+    Route::get('/{news:seo_url}/print',[newsController::class,'show'])->name('print');
 });
 

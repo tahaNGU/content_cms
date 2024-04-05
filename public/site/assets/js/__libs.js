@@ -1504,7 +1504,7 @@
             }
         };
 
-// fraction support test
+// fraction support share
         (function() {
             var testElement, testElementParent, testElementStyle, offsetLeft, i,
                 body = document.getElementsByTagName( "body" )[ 0 ],

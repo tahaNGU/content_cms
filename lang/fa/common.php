@@ -19,14 +19,18 @@ return [
     'messages'=>[
         'success'=>':module جدید ساخته شد',
         'success_edit'=>':module ویرایش شد',
-        'result_not_found'=>"نتیجه ای یافت نشد"
+        'result_not_found'=>"نتیجه ای یافت نشد",
+        'email_success'=>'ایمیل شما با موفقیت ارسال شد'
     ],
 
     'state'=>[
         '0'=>'عدم نمایش',
         '1'=>'نمایش'
     ],
-
+    'gender'=>[
+        '1'=>'زن',
+        '2'=>'مرد'
+    ],
 
     'content'=>[
         'news'=>[

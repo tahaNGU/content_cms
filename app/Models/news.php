@@ -42,6 +42,8 @@ class news extends Model
         'state_main',
     ];
 
+
+
     public function news_cat()
     {
         return $this->belongsTo(news_cat::class, 'catid')->select("id", "title", "seo_url");
@@ -93,6 +95,17 @@ class news extends Model
         }
         return $builder;
     }
+
+
+
+    public function nextNews(){
+        return news::where('id','>',$this->id)->where('state', '1')->where('validity_date', '<=', Carbon::now()->format('Y/m/d H:i:s'))->select(['seo_url'])->first();
+    }
+
+    public function prevNews(){
+        return news::where('id','<',$this->id)->where('state', '1')->where('validity_date', '<=', Carbon::now()->format('Y/m/d H:i:s'))->select(['seo_url'])->first();
+    }
+
 
 
 }

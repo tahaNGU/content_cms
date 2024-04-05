@@ -1,12 +1,10 @@
 $(document).ready
 (
-    function()
-    {
+    function () {
         // menu
         $(".menu .col-level-2 a").mouseenter
         (
-            function()
-            {
+            function () {
                 let catId = $(this).attr("data-cat-id");
 
                 $(".menu .col-level-2 a, .menu .col-level-3").removeClass("active");
@@ -17,14 +15,12 @@ $(document).ready
 
         $('.menu .level-1').mouseenter
         (
-            function()
-            {
+            function () {
                 $(this).doTimeout
                 (
                     'hover',
                     300,
-                    function(elem)
-                    {
+                    function (elem) {
                         $(this).addClass("active");
                         $(this).find(".level-2").slideDown();
                     }
@@ -32,14 +28,12 @@ $(document).ready
             }
         ).mouseleave
         (
-            function()
-            {
+            function () {
                 $(this).doTimeout
                 (
                     'hover',
                     300,
-                    function(elem)
-                    {
+                    function (elem) {
                         $(this).removeClass("active");
                         $(this).find(".level-2").slideUp();
                     }
@@ -50,15 +44,11 @@ $(document).ready
         // sign in
         $('.btn-form-sign-in-password').click
         (
-            function()
-            {
-                if($('.form-sign-in-password').attr('type') === 'text')
-                {
+            function () {
+                if ($('.form-sign-in-password').attr('type') === 'text') {
                     $('.form-sign-in-password').attr('type', 'password');
                     $('.btn-form-sign-in-password').removeClass('bi-eye-slash').addClass('bi-eye');
-                }
-                else
-                {
+                } else {
                     $('.form-sign-in-password').attr('type', 'text');
                     $('.btn-form-sign-in-password').removeClass('bi-eye').addClass('bi-eye-slash');
                 }
@@ -68,8 +58,7 @@ $(document).ready
         // mobile side menu
         $('.mobile-side-menu .nav-dropdown-toggle').click
         (
-            function()
-            {
+            function () {
                 $(this).toggleClass('open');
                 $(this.nextElementSibling).slideToggle();
 
@@ -87,8 +76,7 @@ $(document).ready
         // checkbox new style
         $('.label-input-checkbox-by-style input').change
         (
-            function()
-            {
+            function () {
                 $(this).parents('label').toggleClass('active-checked');
             }
         );
@@ -96,21 +84,44 @@ $(document).ready
         // show password
         $('.btn-show-password').click
         (
-            function()
-            {
+            function () {
                 var obj = $(this).parent().find("input");
 
-                if(obj.attr('type') === 'text')
-                {
+                if (obj.attr('type') === 'text') {
                     obj.attr('type', 'password');
                     $(this).removeClass('fi-rr-eye-crossed').addClass('fi-rr-eye');
-                }
-                else
-                {
+                } else {
                     obj.attr('type', 'text');
                     $(this).removeClass('fi-rr-eye').addClass('fi-rr-eye-crossed');
                 }
             }
         );
+        $("#send_mail_share").on('submit', function (e) {
+            e.preventDefault()
+            $.ajax({
+                url: $(this).attr('action'),
+                type: $(this).attr('method'),
+                data: $("#send_mail_share").serialize(),
+                dataType: "JSON",
+                success: function (res) {
+                    $(".modal-body .alert").remove()
+                    if(typeof(res.email) != "undefined"){
+                        $(".social-share").after("<div class=\"alert alert-danger my-3 p-2\">"+res.email[0]+"</div>")
+                    }else{
+                        if(typeof(res.success) != "undefined"){
+                            $(".social-share").after("<div class=\"alert alert-success my-3 p-2\">"+res.success+"</div>")
+                            $("#send_mail_share").slideUp()
+                        }
+                    }
+                    // if (typeof(res.error) != "undefined") {
+                    //
+                    //     $(".social-share").after("<div class=\"alert alert-danger my-3 p-2\">داداش این تست ها</div>")
+                    // }
+                },
+                error: function () {
+                    alert("error to sending ajax data")
+                }
+            })
+        });
     }
 );

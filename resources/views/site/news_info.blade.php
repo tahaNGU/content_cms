@@ -42,23 +42,25 @@
 
                                 <div>
                                     <div class="print-share-box">
-                                        <a href="#" class="item"><i class="icon-print"></i> چاپ صفحه</a>
+                                        <a href="{{route('news.print',['news'=>$news['seo_url']])}}" class="item"><i class="icon-print"></i> چاپ صفحه</a>
                                         <a href="#" class="item" data-bs-toggle="modal" data-bs-target="#modal-share"><i
                                                 class="icon-share"></i> اشتراک گذاری</a>
                                     </div>
 
                                     <div class="next-prv-post-box">
+                                        @if($news->nextNews())
                                         <div class="post-item">
-                                            <a href="#" class="icon-box"><i class="fi fi-rr-angle-right icon"></i> خبر
+                                            <a href="{{$news->nextNews()->url}}" class="icon-box"><i class="fi fi-rr-angle-right icon"></i> خبر
                                                 بعدی</a>
                                         </div>
-
+                                        @endif
                                         <div class="divider">&nbsp;</div>
-
+                                        @if($news->prevNews())
                                         <div class="post-item">
-                                            <a href="#" class="icon-box prv"> خبر قبلی<i
+                                            <a href="{{$news->prevNews()->url}}" class="icon-box prv"> خبر قبلی<i
                                                     class="fi fi-rr-angle-left icon"></i></a>
                                         </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -178,31 +180,23 @@
                     <div class="social-share">
                         <div class="title">اشتراک گذاری در شبکه های اجتماعی</div>
                         <ul class="items">
-                            <li><a href="" rel="nofollow" target="_blank"><img
-                                        src="{{asset("site/assets/image/social/twitter.png")}}" alt=""></a></li>
-                            <li><a href="" rel="nofollow" target="_blank"><img
-                                        src="{{asset("site/assets/image/social/telegram.png")}}" alt=""></a></li>
-                            <li><a href="" rel="nofollow" target="_blank"><img
-                                        src="{{asset("site/assets/image/social/instagram.png")}}" alt=""></a></li>
-                            <li><a href="" rel="nofollow" target="_blank"><img
-                                        src="{{asset("site/assets/image/social/aparat.png")}}" alt=""></a></li>
-                            <li><a href="" rel="nofollow" target="_blank"><img
-                                        src="{{asset("site/assets/image/social/facebook.png")}}" alt=""></a></li>
-                            <li><a href="" rel="nofollow" target="_blank"><img
-                                        src="{{asset("site/assets/image/social/whatsapp.png")}}" alt=""></a></li>
+                            @include("site.layout.partials.social_media",['title'=>$news["title"],'url'=>$news['url']])
                         </ul>
                     </div>
 
-                    <form action="" method="post" class="form">
+                    <form action="{{route('news.mail',['id'=>$news['id']])}}" method="post" class="form" id="send_mail_share">
+                        @csrf
+                        <input type="hidden" name="module" value="news">
+                        <input type="hidden" name="item_id" value="{{$news['id']}}">
                         <div class="title">ارسال به ایمیل</div>
-                        <input type="text" name="" class="form-input" placeholder="ایمیل را وارد نمایید"/>
-                        <button type="button" class="btn-custom">ارسال</button>
-                    </form>
-
+                        <input type="text" name="email" class="form-input" placeholder="ایمیل را وارد نمایید"/>
+                        <button type="submit" class="btn-custom">ارسال</button>
                     <div class="page-link">
                         <div class="title">آدرس صفحه</div>
-                        <div class="link">https://google.com</div>
+                        <div class="link">{{$news["url"]}}</div>
                     </div>
+                    </form>
+
                 </div>
             </div>
         </div>
@@ -257,4 +251,10 @@
     </div>
     <!--/ add comment -->
 @endsection
+
+{{--@section("footer")--}}
+{{--    <script type="text/javascript">--}}
+{{--        window.print();--}}
+{{--    </script>--}}
+{{--@endsection--}}
 

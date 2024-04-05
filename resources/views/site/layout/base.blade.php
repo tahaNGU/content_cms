@@ -5,14 +5,18 @@
     @yield('head')
 </head>
 <body>
-@include("site.layout.partials.header")
+@if(!str_contains(request()->route()->getName(),'auth'))
+    @include("site.layout.partials.header")
+@endif
 @yield('content')
-@include("site.layout.partials.footer")
+@if(!str_contains(request()->route()->getName(),'auth'))
+    @include("site.layout.partials.footer")
+@endif
 @include("site.layout.partials.modal")
 @include('site.layout.partials.footer_js')
 @yield('footer')
 <script>
-    $(document).ready(function(){
+    $(document).ready(function () {
         $('body').persiaNumber();
     });
 </script>
