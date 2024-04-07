@@ -52,10 +52,21 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('guest')->as('auth.')->group(function (){
-    Route::get('register',[\App\Http\Controllers\Auth\RegisteredUserController::class,'create'])->name('register');
+Route::middleware('guest')->as('auth.')->group(function () {
+    Route::get('register', [\App\Http\Controllers\site\auth\RegisteredUserController::class, 'create'])->name('register');
+    Route::post('register', [\App\Http\Controllers\site\auth\RegisteredUserController::class, 'store'])->name('register');
+    Route::get('login', [\App\Http\Controllers\site\auth\AuthenticatedSessionController::class, 'create'])->name('login');
+    Route::post('login_user',[\App\Http\Controllers\site\auth\AuthenticatedSessionController::class,'authenticateUserName'])->name('authenticateUserName');
+    Route::post('login', [\App\Http\Controllers\site\auth\AuthenticatedSessionController::class, 'store'])->name('store');
+    Route::get('active', [\App\Http\Controllers\site\auth\ActiveController::class, 'active'])->name('active');
+    Route::post('active', [\App\Http\Controllers\site\auth\ActiveController::class, 'confirm'])->name('confirm');
+    Route::post('resend_code', [\App\Http\Controllers\site\auth\ActiveController::class, 'resend_code'])->name('resend_code');
 });
 
+Route::middleware('auth')->as('user.')->group(function () {
+    Route::get('panel',[\App\Http\Controllers\site\user\panelController::class,'index'])->name('panel');
+    Route::get('logout',[\App\Http\Controllers\site\user\panelController::class,'logout'])->name('logout');
+});
 
 
 

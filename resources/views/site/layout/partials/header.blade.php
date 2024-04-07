@@ -28,9 +28,13 @@
                             <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fi fi-rr-user sign-in-up-icon"></i><span class="sign-in-up-title">ورود | ثبت نام</span></button>
 
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#"><i class="fi fi-rr-sign-in icon"></i>ورود</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="{{route('auth.register')}}"><i class="fi fi-rr-user-add icon"></i>ثبت نام</a></li>
+                                @auth
+                                    <li><a class="dropdown-item" href="{{route('user.panel')}}"><i class="fi fi-rr-sign-in icon"></i>پنل کاربری</a></li>
+                                @else
+                                    <li><a class="dropdown-item" href="{{route('auth.login')}}"><i class="fi fi-rr-sign-in icon"></i>ورود</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="{{route('auth.register')}}"><i class="fi fi-rr-user-add icon"></i>ثبت نام</a></li>
+                                @endauth
                             </ul>
                         </div>
                     </div>

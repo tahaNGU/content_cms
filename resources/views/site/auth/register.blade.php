@@ -10,38 +10,40 @@
             <div class="sign-up-box">
                 <a href="#" class="logo"><img src="{{asset('site/assets/image/logo.png')}}" alt=""/></a>
 
-                <form action="" method="post" class="form">
+                <form action="{{route('auth.register')}}" method="post" class="form">
+                    @csrf
                     <div class="title">عضویت در سایت</div>
                     <div class="des">اگر قبلا ثبت نام نکرده اید اینجا ثبت نام کنید</div>
 
                     <div class="input-box">
-                        <input type="text" name="name" class="form-input"
-                               placeholder="نام"/>
+                        <input type="text" name="name" value="{{old('name')}}" class="form-input" placeholder="نام"/>
+                        @error('name') <span class="text text-danger">{{$errors->first('name')}}</span> @enderror
                     </div>
 
 
                     <div class="input-box">
-                        <input type="text" name="form-sign-up-name-family" class="form-input"
-                               placeholder="نام خانوادگی"/>
+                        <input type="text" name="lastname" value="{{old('lastname')}}" class="form-input" placeholder="نام خانوادگی"/>
+                        @error('lastname') <span class="text text-danger">{{$errors->first('lastname')}}</span> @enderror
                     </div>
 
 
                     <div class="input-box">
-                        <input type="text" name="form-sign-up-mobile" class="form-input" placeholder="شماره همراه"/>
+                        <input type="text" name="username" value="{{old('username')}}" class="form-input" placeholder="ایمیل"/>
+                        @error('username') <span class="text text-danger">{{$errors->first('username')}}</span> @enderror
+
                     </div>
 
                     <div class="input-box">
-                        <input type="password" name="form-sign-up-password" class="form-input" placeholder="رمز عبور"/>
+                        <input type="password" name="password" class="form-input" placeholder="رمز عبور"/>
                         <i class="fi fi-rr-eye btn-show-password"></i>
+                        @error('password') <span class="text text-danger">{{$errors->first('password')}}</span> @enderror
                     </div>
 
                     <div class="input-box input-check-box">
-                        <label class="label-input-checkbox-by-style"><input type="checkbox"
-                                                                            name="form-sign-in-newsletter"/>
-                            دریافت خبرنامه</label>
-                        <label class="label-input-checkbox-by-style"><input type="checkbox" name="form-sign-in-terms"/>
-                            <a
-                                href="#" target="_blank">قوانین و مقررات</a> سایت را می پذیرم</label>
+{{--                        <label class="label-input-checkbox-by-style"><input type="checkbox" name="form-sign-in-newsletter"/>دریافت خبرنامه</label>--}}
+                        <label class="label-input-checkbox-by-style"><input type="checkbox" name="rule" value="1"/><a href="#" target="_blank">قوانین و مقررات</a> سایت را می پذیرم</label>
+                        @error('rule') <span class="text text-danger">{{$errors->first('rule')}}</span> @enderror
+
                     </div>
 
                     <button name="form-sign-up-send" class="btn-custom">ثبت نام</button>

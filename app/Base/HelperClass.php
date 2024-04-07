@@ -117,9 +117,11 @@ if (!function_exists('to_english_numbers')) {
         return (int)$integer;
     }
 }
-if (!function_exists('breadcrumb')) {
-    function breadcrumb($model, $breadcrumb = '')
-    {
+
+
+//if (!function_exists('breadcrumb')) {
+//    function breadcrumb($model, $breadcrumb = '')
+//    {
 //        if (empty($breadcrumb)) {
 //            $breadcrumb .= "<li><a href='/main'>صفحه اصلی</a></li>";
 //        }
@@ -133,23 +135,59 @@ if (!function_exists('breadcrumb')) {
 
 //        dd($breadcrumb);
 //        return $breadcrumb;
+//    }
+//}
+
+
+//public function check_mobile($attribute, $value, $parameters)
+//{
+//    $paramsPatternMap = [
+//        'zero_code'    => '/^(00989){1}[0-9]{9}+$/',
+//        'plus'         => '/^(\+989){1}[0-9]{9}+$/',
+//        'code'         => '/^(989){1}[0-9]{9}+$/',
+//        'zero'         => '/^(09){1}[0-9]{9}+$/',
+//        'without_zero' => '/^(9){1}[0-9]{9}+$/',
+//    ];
+//
+//    if (isset($parameters[0]) && in_array($parameters[0], array_keys($paramsPatternMap))) {
+//        return preg_match($paramsPatternMap[$parameters[0]], $value);
+//    }
+//
+//    return (preg_match('/^(((98)|(\+98)|(0098)|0)(9){1}[0-9]{9})+$/', $value) || preg_match('/^(9){1}[0-9]{9}+$/', $value))? true : false;
+//}
+
+//
+//
+if (!function_exists('check_mobile')) {
+    function check_mobile($mobile)
+    {
+        $paramsPatternMap = [
+            'zero_code' => '/^(00989){1}[0-9]{9}+$/',
+            'plus' => '/^(\+989){1}[0-9]{9}+$/',
+            'code' => '/^(989){1}[0-9]{9}+$/',
+            'zero' => '/^(09){1}[0-9]{9}+$/',
+            'without_zero' => '/^(9){1}[0-9]{9}+$/',
+        ];
+        foreach ($paramsPatternMap as $pattern) {
+            if (preg_match($pattern, $mobile)) {
+                return $pattern;
+            }
+        }
+        return false;
+    }
+
+}
+
+if (!function_exists('code_string')) {
+    function code_string($value){
+        return base64_encode(base64_encode($value));
     }
 }
 
 
 
-
-
-//       if (empty($breadcrumb)) {
-//            $breadcrumb = "<ul class='bread-crumb'>";
-//            $breadcrumb .= "<li><a href='/main'>صفحه اصلی</a></li>";
-//            $breadcrumb .= "<li><a href=''>" . $model['title'] . "</a></li>";
-//        }
-//        if (isset($model->$method_name)) {
-//            $breadcrumb .= "<li><a href=''>" . $model->$method_name->title . "</a></li>";
-//            breadcrumb($model->$method_name, $method_name, $breadcrumb);
-//        }else{
-//            $breadcrumb .= "<ul/>";
-//           return $breadcrumb;
-//        }
-
+if (!function_exists('decode_string')) {
+    function decode_string($value){
+        return base64_decode(base64_decode($value));
+    }
+}

@@ -5,3 +5,18 @@
     text-align: justify;
     margin-top: 40px;
 }
+.form .text-danger{
+    text-align: right !important;
+}
+.form .input-box{
+    display: flex;
+    flex-direction: column;
+}
+.numberCode{
+    position: absolute;
+    top: 15px;
+    left: 10px;
+}
+.page-sign-in .container-sign-in .sign-in-box .form .input-check-box .link-forgotten{
+    border: none !important;
+}
