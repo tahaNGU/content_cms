@@ -9,16 +9,17 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class confirmActive extends Mailable
+class forget_pass extends Mailable
 {
     use Queueable, SerializesModels;
 
     /**
      * Create a new message instance.
      */
-    public function __construct(public string $fullname,public string $code)
+    public function __construct(public string $fullname,public int $code)
     {
-
+        $this->fullnamee=$fullname;
+        $this->code=$code;
     }
 
     /**
@@ -27,7 +28,7 @@ class confirmActive extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'فعالسازی حساب کاربری',
+            subject: 'فراموشی رمز عبور',
         );
     }
 
@@ -37,7 +38,7 @@ class confirmActive extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'site.mail.confirm_active',
+            view: 'site.mail.forgot_pass_user',
             with: [
                 'fullname'=>$this->fullname,
                 'code'=>$this->code

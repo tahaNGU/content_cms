@@ -25,6 +25,7 @@ class User extends Authenticatable
         'state',
         'password',
         'confirm_code',
+        'expire_confirm_at',
     ];
 
     /**

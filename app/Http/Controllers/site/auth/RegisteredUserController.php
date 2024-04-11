@@ -7,6 +7,7 @@ use App\Http\Requests\site\RegisterUser;
 use App\Mail\confirmActive;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use Carbon\Carbon;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -41,6 +42,7 @@ class RegisteredUserController extends Controller
             }
             $fullname = $user['name'] . " " . $user['lastname'];
             Mail::to($user['username'])->send(new confirmActive($fullname, $user['confirm_code']));
+            $user->update(['expire_confirm_at'=>Carbon::now()->addSeconds(env('EXPIRE_DATE_CONFIRM_CODE'))]);
             return redirect()->route('auth.active', ['username' => code_string($user['username'])])->with(['state_active' => trans('auth.state_active')]);
         }
         $code = rand(10000, 99999);
@@ -48,6 +50,7 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'lastname' => $request->lastname,
             'username' => $request->username,
+            'expire_confirm_at' => Carbon::now()->addSeconds(env('EXPIRE_DATE_CONFIRM_CODE')),
             'password' => Hash::make($request->password),
             'confirm_code' => $code,
         ]);

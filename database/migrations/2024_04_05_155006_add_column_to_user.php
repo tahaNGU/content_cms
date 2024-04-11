@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->string("lastname")->after("name");
             $table->string("mobile")->nullable();
+            $table->timestamp('expire_confirm_at')->nullable();
             $table->string("confirm_code")->nullable();
             $table->string("username")->unique();
             $table->enum('state',['0','1'])->default('0');
@@ -34,6 +35,7 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn("lastname");
             $table->dropColumn("mobile");
+            $table->dropColumn('expire_confirm_at');
             $table->dropColumn("confirm_code");
             $table->dropColumn("username");
             $table->dropColumn("state");

@@ -240,5 +240,6 @@ return [
 		"access" => "سطح دسترسی",
 		"lastname" => "نام خانوادگی",
 		"rule" => "قوانین و مقررات",
+		"conformation_code" => "کد تایید",
     ],
 ];

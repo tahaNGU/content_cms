@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class confirmActive extends Mailable
+class otp_mail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -18,7 +18,8 @@ class confirmActive extends Mailable
      */
     public function __construct(public string $fullname,public string $code)
     {
-
+        $this->fullname=$fullname;
+        $this->code=$code;
     }
 
     /**
@@ -27,7 +28,7 @@ class confirmActive extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'فعالسازی حساب کاربری',
+            subject: 'کد یکبار مصرف',
         );
     }
 
@@ -37,7 +38,7 @@ class confirmActive extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'site.mail.confirm_active',
+            view: 'site.mail.otp_mail',
             with: [
                 'fullname'=>$this->fullname,
                 'code'=>$this->code

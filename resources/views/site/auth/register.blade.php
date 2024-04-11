@@ -14,7 +14,9 @@
                     @csrf
                     <div class="title">عضویت در سایت</div>
                     <div class="des">اگر قبلا ثبت نام نکرده اید اینجا ثبت نام کنید</div>
-
+                    @if(session()->has('wrong_username'))
+                        <div class="alert alert-danger">{{session()->get('wrong_username')}}</div>
+                    @endif
                     <div class="input-box">
                         <input type="text" name="name" value="{{old('name')}}" class="form-input" placeholder="نام"/>
                         @error('name') <span class="text text-danger">{{$errors->first('name')}}</span> @enderror

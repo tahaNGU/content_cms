@@ -20,7 +20,10 @@
                     @endif
                     <div class="input-box">
                         <input type="text" name="username" value="{{old('username')}}" class="form-input" placeholder="ایمیل" />
-                        @error('username') <span class="text text-danger">{{$errors->first('username')}}</span> @enderror
+                        @error('username')
+                        <span class="text text-danger">{{$errors->first('username')}}</span>
+
+                        @enderror
                     </div>
 {{--                    <div class="input-box">--}}
 {{--                        <input type="password" name="password" class="form-input" placeholder="رمز عبور" />--}}
@@ -54,10 +57,11 @@
 
                         </div>
 
-{{--                        <div class="input-box input-check-box  flex-row">--}}
-{{--                            <a href="#" class="link-forgotten">فراموشی رمز</a>--}}
-{{--                            <a href="#" class="link-forgotten">رمز یکبار مصرف</a>--}}
-{{--                        </div>--}}
+                        <div class="input-box input-check-box  flex-row">
+
+                            <a href="{{route('auth.forget',request()->only('username'))}}" class="link-forgotten">فراموشی رمز</a>
+                            <a href="{{route('auth.otp_create',request()->only('username'))}}" class="link-forgotten">رمز یکبار مصرف</a>
+                        </div>
 
                         <button type="submit" class="btn-custom">ورود</button>
 

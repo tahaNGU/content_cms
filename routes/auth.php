@@ -43,7 +43,7 @@
 //
 //    Route::post('confirm-password', [ConfirmablePasswordController::class, 'store']);
 //
-//    Route::put('password', [PasswordController::class, 'update'])->name('password.update');
+//    Route::put('password', [ForgetPasswordController::class, 'update'])->name('password.update');
 //
 //    Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
 //                ->name('logout');
@@ -61,6 +61,13 @@ Route::middleware('guest')->as('auth.')->group(function () {
     Route::get('active', [\App\Http\Controllers\site\auth\ActiveController::class, 'active'])->name('active');
     Route::post('active', [\App\Http\Controllers\site\auth\ActiveController::class, 'confirm'])->name('confirm');
     Route::post('resend_code', [\App\Http\Controllers\site\auth\ActiveController::class, 'resend_code'])->name('resend_code');
+    Route::get('forgot-password',[\App\Http\Controllers\site\auth\ForgetPasswordController::class,'change_pass'])->name('forget');
+    Route::post('forgot-password',[\App\Http\Controllers\site\auth\ForgetPasswordController::class,'send_form'])->name('send_form');
+    Route::get('recovery-password',[\App\Http\Controllers\site\auth\ForgetPasswordController::class,'recovery_pass'])->name('recovery-password');
+    Route::post('recovery-password',[\App\Http\Controllers\site\auth\ForgetPasswordController::class,'store'])->name('store');
+    Route::get('otp/{username}',[\App\Http\Controllers\site\auth\otpController::class,'otp_create'])->name('otp_create');
+    Route::post('otp/{username}',[\App\Http\Controllers\site\auth\otpController::class,'otp_resend'])->name('otp_resend');
+
 });
 
 Route::middleware('auth')->as('user.')->group(function () {

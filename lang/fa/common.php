@@ -55,6 +55,6 @@ return [
 
     'request_validation'=>[
         'rule'=>'لطفا قوانین و مقررات را انتخاب کنید',
-        'confirm_active'=>'کد فعالسازی صحیح نمی باشد'
+        'confirm_active'=>'کد فعالسازی صحیح نمی باشد',
     ]
 ];
