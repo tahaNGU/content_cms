@@ -42,24 +42,26 @@
 
                                 <div>
                                     <div class="print-share-box">
-                                        <a href="{{route('news.print',['news'=>$news['seo_url']])}}" class="item"><i class="icon-print"></i> چاپ صفحه</a>
+                                        <a href="{{route('news.print',['news'=>$news['seo_url']])}}" class="item"><i
+                                                class="icon-print"></i> چاپ صفحه</a>
                                         <a href="#" class="item" data-bs-toggle="modal" data-bs-target="#modal-share"><i
                                                 class="icon-share"></i> اشتراک گذاری</a>
                                     </div>
 
                                     <div class="next-prv-post-box">
                                         @if($news->nextNews())
-                                        <div class="post-item">
-                                            <a href="{{$news->nextNews()->url}}" class="icon-box"><i class="fi fi-rr-angle-right icon"></i> خبر
-                                                بعدی</a>
-                                        </div>
+                                            <div class="post-item">
+                                                <a href="{{$news->nextNews()->url}}" class="icon-box"><i
+                                                        class="fi fi-rr-angle-right icon"></i> خبر
+                                                    بعدی</a>
+                                            </div>
                                         @endif
                                         <div class="divider">&nbsp;</div>
                                         @if($news->prevNews())
-                                        <div class="post-item">
-                                            <a href="{{$news->prevNews()->url}}" class="icon-box prv"> خبر قبلی<i
-                                                    class="fi fi-rr-angle-left icon"></i></a>
-                                        </div>
+                                            <div class="post-item">
+                                                <a href="{{$news->prevNews()->url}}" class="icon-box prv"> خبر قبلی<i
+                                                        class="fi fi-rr-angle-left icon"></i></a>
+                                            </div>
                                         @endif
                                     </div>
                                 </div>
@@ -95,9 +97,14 @@
 
                                 <div class="btn-new-comment-des-box">
                                     <span class="des">شما هم می توانید درمورد این مطلب نظر بدهید</span>
-                                    <button type="button" class="btn-custom" data-bs-toggle="modal"
-                                            data-bs-target="#modal-comment">افزودن نظر جدید
-                                    </button>
+                                    @auth
+                                        <button type="button" class="btn-custom" data-bs-toggle="modal"
+                                                data-bs-target="#modal-comment">افزودن نظر جدید
+                                        </button>
+                                    @else
+                                        <a href="{{route('auth.login')}}" class="btn-custom">افزودن نظر جدید
+                                        </a>
+                                    @endauth
                                 </div>
                             </div>
 
@@ -184,17 +191,18 @@
                         </ul>
                     </div>
 
-                    <form action="{{route('news.mail',['id'=>$news['id']])}}" method="post" class="form" id="send_mail_share">
+                    <form action="{{route('news.mail',['id'=>$news['id']])}}" method="post" class="form"
+                          id="send_mail_share">
                         @csrf
                         <input type="hidden" name="module" value="news">
                         <input type="hidden" name="item_id" value="{{$news['id']}}">
                         <div class="title">ارسال به ایمیل</div>
                         <input type="text" name="email" class="form-input" placeholder="ایمیل را وارد نمایید"/>
                         <button type="submit" class="btn-custom">ارسال</button>
-                    <div class="page-link">
-                        <div class="title">آدرس صفحه</div>
-                        <div class="link">{{$news["url"]}}</div>
-                    </div>
+                        <div class="page-link">
+                            <div class="title">آدرس صفحه</div>
+                            <div class="link">{{$news["url"]}}</div>
+                        </div>
                     </form>
 
                 </div>
@@ -206,55 +214,67 @@
     <!-- add comment -->
     <div class="modal fade modal-comment" id="modal-comment" tabindex="-1" aria-labelledby="modal-comment"
          aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">ارسال نظر</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
+        <form action="{{route('comment.store',['type'=>'news','module_id'=>$news['id']])}}" method="post" class="form">
+            @csrf
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
 
-                <div class="modal-body">
-                    <form action="" method="post" class="form">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="score-box">
-                                    <div class="title">امتیاز شما</div>
-                                    <div class="star-box">
-                                        <i class="fi fi-rr-star-fill"></i>
-                                        <i class="fi fi-rr-star-fill"></i>
-                                        <i class="fi fi-rr-star-fill"></i>
-                                        <i class="fi fi-rr-star-fill"></i>
-                                        <i class="fi fi-rr-star-fill"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="modal-header">
+                        <h5 class="modal-title">ارسال نظر</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+{{--                        <div class="row">--}}
+{{--                            <div class="col-12">--}}
+{{--                                <div class="score-box">--}}
+{{--                                    <div class="title">امتیاز شما</div>--}}
+{{--                                    <div class="star-box">--}}
+{{--                                        <i class="fi fi-rr-star-fill"></i>--}}
+{{--                                        <i class="fi fi-rr-star-fill"></i>--}}
+{{--                                        <i class="fi fi-rr-star-fill"></i>--}}
+{{--                                        <i class="fi fi-rr-star-fill"></i>--}}
+{{--                                        <i class="fi fi-rr-star-fill"></i>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
 
                         <div class="row">
                             <div class="col-12">
                                 <div class="input-box">
                                     <label for="form-comment-message">نظر شما</label>
-                                    <textarea name="form-comment-message" id="form-comment-message"
+                                    <textarea name="note" id="form-comment-message"
                                               class="form-textarea" placeholder="دیدگاه خود را بنویسید"></textarea>
+                                    @error("note")
+                                    <span class="text text-danger">{{$errors->first('note')}}</span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
-                    </form>
-                </div>
+                    </div>
 
-                <div class="modal-footer">
-                    <button type="button" class="btn-custom-cancel" data-bs-dismiss="modal">انصراف و بازگشت</button>
-                    <button type="button" class="btn-custom">ثبت نظر</button>
+                    <div class="modal-footer">
+                        <button type="button" class="btn-custom-cancel" data-bs-dismiss="modal">انصراف و بازگشت</button>
+                        <button type="submit" class="btn-custom">ثبت نظر</button>
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
     <!--/ add comment -->
+    {{--    <a href="{{route('comment.create',['type'=>'news','module_id'=>'1'])}}">mamad kojaeai</a>--}}
 @endsection
 
-{{--@section("footer")--}}
-{{--    <script type="text/javascript">--}}
-{{--        window.print();--}}
-{{--    </script>--}}
-{{--@endsection--}}
+@section("footer")
+    @error("note")
+    <script type="text/javascript">
+
+        var myModal = new bootstrap.Modal(document.getElementById("modal-comment"), {});
+        document.onreadystatechange = function () {
+            myModal.show();
+        };
+    </script>
+    @enderror
+@endsection
 

@@ -37,7 +37,6 @@ class make_resizeImage extends Command
                 foreach ($value1 as $key2 => $value2) {
                     foreach ($value2 as $key3 => $value3) {
 
-
                         $image_name = sprintf("no_image(%sx%s).jpg", $key3, $value3);
                         $no_image_name = public_path($dir_no_images . $image_name);
                         if (!file_exists($no_image_name)) {

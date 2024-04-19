@@ -26,3 +26,7 @@ Route::prefix('/news')->as('news.')->group(function () {
     Route::get('/{news:seo_url}/print',[newsController::class,'show'])->name('print');
 });
 
+
+Route::prefix('comment/{type}/{module_id}')->middleware('auth')->middleware('access')->as('comment.')->group(function (){
+    Route::post('/store',[\App\Http\Controllers\site\user\commentController::class,'store'])->name('store');
+});

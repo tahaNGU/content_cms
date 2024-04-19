@@ -7,6 +7,8 @@ return [
         'content' => 'محتوی',
         'manager' => 'مدیران',
         'permission' => 'گروه دسترسی',
+        'comment' => 'نظرات',
+        'product' => 'محصول',
     ],
     'module_name_site' => [
         'news' => 'اخبار',

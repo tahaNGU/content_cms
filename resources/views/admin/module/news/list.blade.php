@@ -94,7 +94,6 @@
                                             @slot("content")
                                                 @component($prefix_component."input",['name'=>'title','title'=>'عنوان','value'=>request()->get("title"),'class'=>'w-50'])@endcomponent
                                                 @component($prefix_component."select_recursive",['name'=>'catid','value'=>request()->get('catid'),'options'=>$news_cats_search,'label'=>'دسته بندی','choose'=>true, 'sub_method'=>'sub_cats'])@endcomponent
-
                                                 <div class="my-3">
                                                     @component($prefix_component."button",['title'=>'جستجو'])@endcomponent
                                                 </div>

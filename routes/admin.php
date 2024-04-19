@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\comment_controller;
 use App\Http\Controllers\admin\content_controller;
 use App\Http\Controllers\admin\manager_controller;
 use App\Http\Controllers\admin\news_cat_controller;
@@ -16,7 +17,7 @@ Route::middleware("auth:admin")->group(function () {
 
     Route::view("/base", "admin.layout.base")->name("admin.base");
     Route::view("/error", "admin.layout.errors.404")->name("admin.error404");
-    Route::post("province_city",province_city_controller::class)->name("province_city");
+    Route::post("province_city", province_city_controller::class)->name("province_city");
     Route::resource("news_cat", news_cat_controller::class)->except("show");
     Route::post("news_cat/action_all", [news_cat_controller::class, "action_all"])->name("news_cat.action_all");
     Route::resource("news", news_controller::class)->except("show");
@@ -25,6 +26,8 @@ Route::middleware("auth:admin")->group(function () {
     Route::post("manager/action_all", [manager_controller::class, "action_all"])->name("manager.action_all");
     Route::resource("permission", permission_controller::class)->except("show");
     Route::post("permission/action_all", [permission_controller::class, "action_all"])->name("permission.action_all");
+    Route::resource("comment", comment_controller::class)->except("show","store","create");
+    Route::post("comment/action_all", [comment_controller::class, "action_all"])->name("comment.action_all");
     Route::prefix("content/{item_id}/{module}/")->as("content.")->group(function () {
         Route::get("create", [content_controller::class, 'create'])->name("create");
         Route::post("store", [content_controller::class, 'store'])->name("store");
@@ -34,4 +37,5 @@ Route::middleware("auth:admin")->group(function () {
         Route::get("edit", [content_controller::class, 'edit'])->name("edit");
         Route::post("update", [content_controller::class, 'update'])->name("update");
     });
+
 });

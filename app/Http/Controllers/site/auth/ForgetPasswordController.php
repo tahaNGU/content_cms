@@ -57,7 +57,7 @@ class ForgetPasswordController extends Controller
             'confirm_code' => ['required', 'min:1'],
             'password' => ['required', 'string', 'min:1', 'max:255', 'confirmed'],
         ], ['username.exists' => 'این نام کاربری وجود ندارد']);
-        $user = User::where('username', $request->get('username'))->where('confirm_code', $request->confirm_code)->where('expire_confirm_at','>=',Carbon::now())->where('state', '1')->first();
+        $user = User::where('username', $request->get('username'))->where('confirm_code', $request->confirm_code)->where('state', '1')->first();
 
         if(is_null($user)){
             throw ValidationException::withMessages([

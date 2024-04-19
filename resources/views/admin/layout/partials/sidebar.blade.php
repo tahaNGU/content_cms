@@ -44,7 +44,12 @@
                     <li><a class="nav-link" href="{{route("admin.news.index")}}">لیست اخبار</a></li>
                 </ul>
             </li>
-
+            <li class="dropdown">
+                <a href="#" class="nav-link has-dropdown"><i data-feather="edit-2"></i><span>نظرات</span></a>
+                <ul class="dropdown-menu">
+                    <li><a class="nav-link" href="{{route("admin.comment.index")}}">لیست نظرات</a></li>
+                </ul>
+            </li>
         </ul>
     </aside>
 </div>

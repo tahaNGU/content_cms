@@ -1,5 +1,5 @@
 @extends("admin.layout.base")
-@php $module_name="  لیست محتوای  " . __("modules.module_name")[$module_type] . " ({$model['title']}) " @endphp
+@php $module_name="  لیست   " . __("modules.module_name")[$module_type] . " ({$model['title']}) " @endphp
 @section("title")
     {{$module_name}}
 @endsection
