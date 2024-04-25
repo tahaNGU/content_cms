@@ -107,8 +107,9 @@
                                     @endauth
                                 </div>
                             </div>
-
-                            @include("site.layout.partials.comment",['comment'=>$comment])
+                            <div class="result_comment">
+                                @include("site.layout.partials.comment",['comment'=>$comment])
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -221,18 +222,6 @@
 
     </script>
     @enderror
-{{--    <script>--}}
-{{--        $.ajax({--}}
-{{--            url:"{{route("comment.show",['model'=>$news->comment])}}",--}}
-{{--            method:"GET",--}}
-{{--            dataType:"json",--}}
-{{--            success:function (result) {--}}
-{{--                console.log(result)--}}
-{{--            },--}}
-{{--            error:function () {--}}
-{{--                alert("error to sending ajax data")--}}
-{{--            }--}}
-{{--        })--}}
-{{--    </script>--}}
+
 @endsection
 

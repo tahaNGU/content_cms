@@ -12,8 +12,4 @@
 <link rel="stylesheet" href="{{asset('site/assets/css/libs/select2.min.css')}}" >
 <link rel="stylesheet" href="{{asset('site/assets/css/main.css')}}" >
 <link rel="stylesheet" href="{{asset('site/assets/css/inner-style.css')}}" >
-
-
-
-
-
+<script type="text/javascript" src="{{asset('site/assets/js/libs/jquery.min.js')}}"></script>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\site\user;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\site\commentRequest;
+use App\Models\comment;
 use App\Models\news;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -31,6 +32,11 @@ class commentController extends Controller
         ],202);
     }
 
+    public function like(comment $comment){
+        $comment->update([
+            ''
+        ]);
+    }
 
 
     private function model($model)

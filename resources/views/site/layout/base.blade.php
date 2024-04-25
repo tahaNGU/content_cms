@@ -3,6 +3,7 @@
 <head>
     @include("site.layout.partials.head")
     @yield('head')
+
 </head>
 <body>
 @if(!str_contains(request()->route()->getName(),'auth'))

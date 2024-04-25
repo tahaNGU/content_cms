@@ -33,15 +33,19 @@ class newsController extends Controller
         return view('site.news', compact('news_cat', 'news', 'news_cats', 'hit_news'));
     }
 
-    public function show(news $news)
+    public function show(Request $request, news $news)
     {
-        if (!$news->state)
-            abort(404);
-        if (str_contains(request()->url(),'/print')) {
-            return view('site.print.news_info', compact('news'));
+        $comment = $news->comment()->where("state", "1")->paginate(4);
+        if ($request->ajax()) {
+            return view("site.layout.partials.comment",compact('comment'));
+        } else {
+            if (!$news->state)
+                abort(404);
+            if (str_contains(request()->url(), '/print')) {
+                return view('site.print.news_info', compact('news'));
+            }
+            return view('site.news_info', compact('news', 'comment'));
         }
-        $comment=$news->comment()->where("state","1")->get();
-        return view('site.news_info', compact('news','comment'));
     }
 
 

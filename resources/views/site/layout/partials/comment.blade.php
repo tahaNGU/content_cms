@@ -1,55 +1,61 @@
 @if(isset($comment[0]))
-<div class="comment-item">
-    <div class="comment-data">
-        <div class="image-box"><img src="{{asset("site/assets/image/user-w.png")}}" alt="">
-        </div>
-
-        <div class="comment-inner">
-            <div class="user-date">
-                <span class="user">حانیه ارجمندی</span>
-                <span class="date">۱۴۰۰/۰۳/۲۳</span>
+    @foreach($comment as $item)
+        <div class="comment-item">
+            <div class="comment-data">
+                <div class="image-box"><img src="{{asset("site/assets/image/user-w.png")}}" alt="">
+                </div>
+                <div class="comment-inner">
+                    <div class="user-date">
+                        <span class="user">{{$item->user->fullname}}</span>
+                        <span class="date">{{$item->date_convert()}}</span>
+                    </div>
+                    <div class="des">{{$item["note"]}}</div>
+                    <div class="like" data-commentid="{{$item["id"]}}">
+                        <span class="like-des">آیا این دیدگاه برایتان مفید بود؟</span>
+                        <button type="button" class="btn-like increaseLike">{{$item->count_like}} <i
+                                class="fi fi-rr-thumbs-up icon"></i></button>
+                        <button type="button" class="btn-like decreaseLike">{{$item->count_dislike}} <i
+                                class="fi fi-rr-thumbs-down icon"></i></button>
+                    </div>
+                </div>
             </div>
-            <div class="des">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-                استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و
-                سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع
-                بالورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از
-                طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که
-                لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با
-            </div>
-            <div class="like">
-                <span class="like-des">آیا این دیدگاه برایتان مفید بود؟</span>
-                <button type="button" class="btn-like">۱۰ <i
-                        class="fi fi-rr-thumbs-up icon"></i></button>
-            </div>
+            @if(!empty($item['response_note']))
+                <div class="comment-data answer">
+                    <div class="user-date">
+                        <span class="user">پاسخ پشتیبان</span>
+                        <span class="date">{{$item->date_convert('response_created_at')}}</span>
+                    </div>
+                    <div class="des">{!! $item['response_note'] !!}</div>
+                </div>
+            @endif
         </div>
-    </div>
-
-    <div class="comment-data answer">
-        <div class="user-date">
-            <span class="user">پاسخ پشتیبان</span>
-            <span class="date">۱۴۰۰/۰۳/۲۳</span>
-        </div>
-        <div class="des">ممنون از نظر شما دوست عزیز</div>
-    </div>
-</div>
-
-<div class="container-fluid container-pagination">
-    <div class="container-custom">
-        <div class="row">
-            <div class="col">
-
-                <ul class="pagination">
-                    <li><a href="#" class="btn-next-prev"><i class="icon fi fi-rr-angle-right"></i></a></li>
-                    <li><a href="#">۱</a></li>
-                    <li><a href="#" class="active">۲</a></li>
-                    <li><span>...</span></li>
-                    <li><a href="#">۷</a></li>
-                    <li><a href="#">۸</a></li>
-                    <li><a href="#" class="btn-next-prev"><i class="icon fi fi-rr-angle-left"></i></a></li>
-                </ul>
-
-            </div>
-        </div>
-    </div>
-</div>
+    @endforeach
+    {{$comment->links('site.layout.paginate.paginate')}}
 @endif
+
+<script>
+    $(".pagination a").click(function (e) {
+        e.preventDefault()
+        if ($(this).attr("href") != "javascript:void(0)") {
+
+            $.ajax({
+                url: $(this).attr('href'),
+                method: "get",
+                success: function (res) {
+                    $(".result_comment").html(res)
+                    $('html, body').scrollTop($(".comment-box").offset().top);
+
+                },
+                error: function () {
+                    alert("error to sending ajax data")
+                }
+            })
+        }
+    })
+    $(".increaseLike").click(function () {
+
+    })
+
+
+
+</script>

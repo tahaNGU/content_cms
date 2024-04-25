@@ -1,5 +1,4 @@
 
-<script type="text/javascript" src="{{asset('site/assets/js/libs/jquery.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('site/assets/js/libs/jquery-ui.js')}}"></script>
 <script type="text/javascript" src="{{asset('site/assets/js/libs/bootstrap.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('site/assets/js/libs/slick.min.js')}}"></script>
