@@ -30,3 +30,4 @@ Route::prefix('/news')->as('news.')->group(function () {
 Route::prefix('comment/{type}/{module_id}')->middleware('auth')->middleware('access')->as('comment.')->group(function (){
     Route::post('/store',[\App\Http\Controllers\site\user\commentController::class,'store'])->name('store');
 });
+//Route::get('/show/{model}',[\App\Http\Controllers\site\user\commentController::class,'show'])->name('comment.show');

@@ -241,5 +241,6 @@ return [
 		"lastname" => "نام خانوادگی",
 		"rule" => "قوانین و مقررات",
 		"conformation_code" => "کد تایید",
+		"response_note" => "پاسخ",
     ],
 ];

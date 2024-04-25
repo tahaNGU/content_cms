@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::table('comments', function (Blueprint $table) {
             $table->enum("state",['0','1'])->default("0")->after('count_dislike');
+            $table->string('ip_address', 45);
         });
     }
 
@@ -22,7 +23,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('comments', function (Blueprint $table) {
-            $table->dropColumn('state');
+            $table->dropIfExists('state');
+            $table->dropIfExists('ip_address');
         });
     }
 };

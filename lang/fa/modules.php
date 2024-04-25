@@ -7,12 +7,11 @@ return [
         'content' => 'محتوی',
         'manager' => 'مدیران',
         'permission' => 'گروه دسترسی',
-        'comment' => 'نظرات',
+        'comment' => 'نظر',
         'product' => 'محصول',
     ],
     'module_name_site' => [
         'news' => 'اخبار',
         'home' => 'باند و گاز کاوه',
-
     ],
 ];

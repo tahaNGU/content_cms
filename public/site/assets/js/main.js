@@ -105,11 +105,11 @@ $(document).ready
                 dataType: "JSON",
                 success: function (res) {
                     $(".modal-body .alert").remove()
-                    if(typeof(res.email) != "undefined"){
-                        $(".social-share").after("<div class=\"alert alert-danger my-3 p-2\">"+res.email[0]+"</div>")
-                    }else{
-                        if(typeof(res.success) != "undefined"){
-                            $(".social-share").after("<div class=\"alert alert-success my-3 p-2\">"+res.success+"</div>")
+                    if (typeof (res.email) != "undefined") {
+                        $(".social-share").after("<div class=\"alert alert-danger my-3 p-2\">" + res.email[0] + "</div>")
+                    } else {
+                        if (typeof (res.success) != "undefined") {
+                            $(".social-share").after("<div class=\"alert alert-success my-3 p-2\">" + res.success + "</div>")
                             $("#send_mail_share").slideUp()
                         }
                     }
@@ -123,5 +123,33 @@ $(document).ready
                 }
             })
         });
+
+
+        $(".form_comment").submit(function (e) {
+            e.preventDefault()
+            $.ajax({
+                url: $(this).attr("action"),
+                type: $(this).attr("method"),
+                data: $(this).serialize(),
+                dataType: 'JSON',
+                success: function (res) {
+                    $(".form_comment").parent().find(".text.text-danger").remove()
+                    if (typeof res.success !== 'undefined') {
+                        $(".form_comment").slideUp()
+                        $(".form_comment").before("<div class='alert alert-success'>نظر شما ثبت شد</div>")
+                        // your code here
+                    } else {
+                        $(res).each(function (index, element) {
+                            $.each(element, function (index2, element2) {
+                                $(".form_comment [name="+index2+"]").after("<span class='text text-danger'>" + element2 + "</span>")
+                            })
+                        })
+                    }
+                },
+                error: function (res) {
+                    alert(("error to sending ajax data"))
+                }
+            })
+        })
     }
 );

@@ -108,65 +108,7 @@
                                 </div>
                             </div>
 
-                            <div class="comment-item">
-                                <div class="comment-data">
-                                    <div class="image-box"><img src="{{asset("site/assets/image/user-w.png")}}" alt="">
-                                    </div>
-
-                                    <div class="comment-inner">
-                                        <div class="user-date">
-                                            <span class="user">حانیه ارجمندی</span>
-                                            <span class="date">۱۴۰۰/۰۳/۲۳</span>
-                                        </div>
-                                        <div class="des">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-                                            استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و
-                                            سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع
-                                            بالورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از
-                                            طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که
-                                            لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با
-                                        </div>
-                                        <div class="like">
-                                            <span class="like-des">آیا این دیدگاه برایتان مفید بود؟</span>
-                                            <button type="button" class="btn-like">۱۰ <i
-                                                    class="fi fi-rr-thumbs-up icon"></i></button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="comment-data answer">
-                                    <div class="user-date">
-                                        <span class="user">پاسخ پشتیبان</span>
-                                        <span class="date">۱۴۰۰/۰۳/۲۳</span>
-                                    </div>
-                                    <div class="des">ممنون از نظر شما دوست عزیز</div>
-                                </div>
-                            </div>
-
-                            <div class="comment-item">
-                                <div class="comment-data">
-                                    <div class="image-box"><img src="{{asset("site/assets/image/user-w.png")}}" alt="">
-                                    </div>
-
-                                    <div class="comment-inner">
-                                        <div class="user-date">
-                                            <span class="user">حانیه ارجمندی</span>
-                                            <span class="date">۱۴۰۰/۰۳/۲۳</span>
-                                        </div>
-                                        <div class="des">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-                                            استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و
-                                            سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع
-                                            بالورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از
-                                            طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که
-                                            لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با
-                                        </div>
-                                        <div class="like">
-                                            <span class="like-des">آیا این دیدگاه برایتان مفید بود؟</span>
-                                            <button type="button" class="btn-like">۱۰ <i
-                                                    class="fi fi-rr-thumbs-up icon"></i></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            @include("site.layout.partials.comment",['comment'=>$comment])
                         </div>
                     </div>
                 </div>
@@ -214,32 +156,33 @@
     <!-- add comment -->
     <div class="modal fade modal-comment" id="modal-comment" tabindex="-1" aria-labelledby="modal-comment"
          aria-hidden="true">
-        <form action="{{route('comment.store',['type'=>'news','module_id'=>$news['id']])}}" method="post" class="form">
-            @csrf
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
 
-                    <div class="modal-header">
-                        <h5 class="modal-title">ارسال نظر</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
 
+                <div class="modal-header">
+                    <h5 class="modal-title">ارسال نظر</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <form action="{{route('comment.store',['type'=>'news','module_id'=>$news['id']])}}" method="post"
+                      class="form form_comment">
                     <div class="modal-body">
-{{--                        <div class="row">--}}
-{{--                            <div class="col-12">--}}
-{{--                                <div class="score-box">--}}
-{{--                                    <div class="title">امتیاز شما</div>--}}
-{{--                                    <div class="star-box">--}}
-{{--                                        <i class="fi fi-rr-star-fill"></i>--}}
-{{--                                        <i class="fi fi-rr-star-fill"></i>--}}
-{{--                                        <i class="fi fi-rr-star-fill"></i>--}}
-{{--                                        <i class="fi fi-rr-star-fill"></i>--}}
-{{--                                        <i class="fi fi-rr-star-fill"></i>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-
+                        {{--                        <div class="row">--}}
+                        {{--                            <div class="col-12">--}}
+                        {{--                                <div class="score-box">--}}
+                        {{--                                    <div class="title">امتیاز شما</div>--}}
+                        {{--                                    <div class="star-box">--}}
+                        {{--                                        <i class="fi fi-rr-star-fill"></i>--}}
+                        {{--                                        <i class="fi fi-rr-star-fill"></i>--}}
+                        {{--                                        <i class="fi fi-rr-star-fill"></i>--}}
+                        {{--                                        <i class="fi fi-rr-star-fill"></i>--}}
+                        {{--                                        <i class="fi fi-rr-star-fill"></i>--}}
+                        {{--                                    </div>--}}
+                        {{--                                </div>--}}
+                        {{--                            </div>--}}
+                        {{--                        </div>--}}
+                        @csrf
                         <div class="row">
                             <div class="col-12">
                                 <div class="input-box">
@@ -256,11 +199,12 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn-custom-cancel" data-bs-dismiss="modal">انصراف و بازگشت</button>
-                        <button type="submit" class="btn-custom">ثبت نظر</button>
+                        <button type="submit" class="btn-custom btn-comment">ثبت نظر</button>
                     </div>
-                </div>
+                </form>
             </div>
-        </form>
+        </div>
+
     </div>
     <!--/ add comment -->
     {{--    <a href="{{route('comment.create',['type'=>'news','module_id'=>'1'])}}">mamad kojaeai</a>--}}
@@ -274,7 +218,21 @@
         document.onreadystatechange = function () {
             myModal.show();
         };
+
     </script>
     @enderror
+{{--    <script>--}}
+{{--        $.ajax({--}}
+{{--            url:"{{route("comment.show",['model'=>$news->comment])}}",--}}
+{{--            method:"GET",--}}
+{{--            dataType:"json",--}}
+{{--            success:function (result) {--}}
+{{--                console.log(result)--}}
+{{--            },--}}
+{{--            error:function () {--}}
+{{--                alert("error to sending ajax data")--}}
+{{--            }--}}
+{{--        })--}}
+{{--    </script>--}}
 @endsection
 

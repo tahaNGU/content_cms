@@ -9,12 +9,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
+use Morilog\Jalali\Jalalian;
 
 class comment extends Model
 {
     use HasFactory, SoftDeletes, date_convert, convert_date_to_timestamp;
 
-    protected $appends = ['nameModule'];
+    protected $appends = ['nameModule','fullname','created_at_show'];
     protected $table = 'comments';
 
     public function commentable()
@@ -32,7 +33,10 @@ class comment extends Model
         'user_id',
         'state',
         'commentable_type',
-        'commentable_id'
+        'commentable_id',
+        'ip_address',
+        'response_note',
+        'response_created_at',
     ];
 
     public function getNameModuleAttribute()
@@ -59,13 +63,22 @@ class comment extends Model
             $builder->where('state', $params['state']);
         }
         if (isset($params['have_response'])) {
-            if ($params['have_response']=='2') {
+            if ($params['have_response'] == '2') {
                 $builder->whereNull('response_note');
-            }else{
+            } else {
                 $builder->whereNotNull('response_note');
             }
         }
         return $builder;
+    }
+
+    public function getCreatedAtShowAttribute($value)
+    {
+        return Jalalian::forge($value)->format("Y/m/d");
+    }
+
+    public function getFullnameAttribute(){
+        return $this->user->name." ".$this->user->lastname;
     }
 
 }

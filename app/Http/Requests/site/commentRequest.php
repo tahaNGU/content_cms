@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\site;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class commentRequest extends FormRequest
 {
@@ -25,4 +27,5 @@ class commentRequest extends FormRequest
             'note'=>'required|string',
         ];
     }
+
 }

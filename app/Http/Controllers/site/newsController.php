@@ -40,7 +40,8 @@ class newsController extends Controller
         if (str_contains(request()->url(),'/print')) {
             return view('site.print.news_info', compact('news'));
         }
-        return view('site.news_info', compact('news'));
+        $comment=$news->comment()->where("state","1")->get();
+        return view('site.news_info', compact('news','comment'));
     }
 
 
