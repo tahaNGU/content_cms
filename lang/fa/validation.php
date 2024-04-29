@@ -242,5 +242,7 @@ return [
 		"rule" => "قوانین و مقررات",
 		"conformation_code" => "کد تایید",
 		"response_note" => "پاسخ",
-    ],
+		"type" => "نوع",
+		"open_type" => " نوع باز شدن",
+    ]
 ];

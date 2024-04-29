@@ -31,6 +31,13 @@
                 </ul>
             </li>
             <li class="dropdown">
+                <a href="#" class="nav-link has-dropdown"><i data-feather="monitor"></i><span>بنر</span></a>
+                <ul class="dropdown-menu">
+                    <li><a class="nav-link" href="{{route("admin.banner.create")}}">بنر جدید</a></li>
+                    <li><a class="nav-link" href="{{route("admin.banner.index")}}">لیست بنر ها</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
                 <a href="#" class="nav-link has-dropdown"><i data-feather="monitor"></i><span>دسته بندی اخبار</span></a>
                 <ul class="dropdown-menu">
                     <li><a class="nav-link" href="{{route("admin.news_cat.create")}}">دسته بندی اخبار جدید</a></li>

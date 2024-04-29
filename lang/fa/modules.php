@@ -9,6 +9,7 @@ return [
         'permission' => 'گروه دسترسی',
         'comment' => 'نظر',
         'product' => 'محصول',
+        'banner' => 'بنر',
     ],
     'module_name_site' => [
         'news' => 'اخبار',

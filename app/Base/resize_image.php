@@ -91,6 +91,21 @@ function resize_image()
                 ]
             ],
         ],
+        'banner_type_1' => [
+            'pic' => [
+                [
+                    '1360' => '718',
+                ],
+            ]
+        ],
+        'banner_type_2' => [
+            'pic' => [
+                [
+                    '1360' => '400',
+                ],
+            ]
+        ],
+
     ];
 
     return $resizes;

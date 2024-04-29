@@ -166,7 +166,6 @@ class news_controller extends Controller
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()]);
         }
-
         return (new admin_controller())->action($request, news::class);
     }
 }

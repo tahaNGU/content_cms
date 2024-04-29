@@ -13,57 +13,52 @@
                             <h4>{{$module_name}}</h4>
                         </div>
                         <div class="card-body">
-                            @if(isset($news[0]))
+
+                            @if(isset($banners[0]))
                                 @component($prefix_component."navtab",['number'=>2,'titles'=>['لیست','جستجو']])
                                     @slot("tabContent0")
-                                        @component($prefix_component."form",['action'=>route('admin.news.action_all')])
+                                        @component($prefix_component."form",['action'=>route("admin.banner.action_all")])
                                             @slot("content")
-
                                                 <table class="table text-center">
                                                     <thead>
                                                     <tr>
                                                         <th scope="col"><input type="checkbox" id="check_all"></th>
                                                         <th scope="col">ردیف</th>
                                                         <th scope="col">عنوان</th>
-                                                        <th scope="col">مدیر</th>
-                                                        <th scope="col">دسته بندی</th>
+                                                        <th scope="col">مکان</th>
+                                                        <th scope="col">وضعیت</th>
                                                         <th scope="col">ترتیب</th>
-                                                        <th scope="col">وضعیت نمایش</th>
-                                                        <th scope="col">نمایش در صفحه اصلی</th>
-                                                        <th scope="col">تاریخ نمایش</th>
                                                         <th scope="col">تاریخ</th>
                                                         <th scope="col">عملیات</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                    @foreach($news as $item)
+                                                    @foreach($banners as $banner)
                                                         <tr>
-                                                            <th scope="row"><input type="checkbox" class="checkbox_item"  name="item[]" value="{{$item['id']}}"></th>
-                                                            <td>{{ $loop->iteration + $news->firstItem() - 1 }}
-                                                            <td>{{$item["title"]}}</td>
-                                                            <td>مدیر اصلی</td>
-                                                            <td>{{$item->news_cat->title ?? ""}}</td>
-                                                            <td><input type="text" value="{{$item["order"]}}" class="input-order" name="order[{{$item['id']}}]"></td>
-                                                            <td>
-                                                                @component($prefix_component."state_style",['id'=>$item["id"],"column"=>'state','state'=>$item["state"]])@endcomponent
+                                                            <th scope="row"><input type="checkbox" name="item[]"
+                                                                                   class="checkbox_item"
+                                                                                   value="{{$banner['id']}}"></th>
+                                                            <td>{{ $loop->iteration + $banners->firstItem() - 1 }}
                                                             </td>
+                                                            <td>{{$banner["title"]}}</td>
+                                                            <td>{{$banner["type_name"]}}</td>
+                                                            <td>@component($prefix_component."state_style",['id'=>$banner["id"],"column"=>'state','state'=>$banner["state"]])@endcomponent</td>
+                                                            <td><input type="text" value="{{$banner["order"]}}"
+                                                                       class="input-order"
+                                                                       name="order[{{$banner['id']}}]"></td>
+                                                            <td>{{$banner->date_convert()}}</td>
                                                             <td>
-                                                                @component($prefix_component."state_style",['id'=>$item["id"],"column"=>'state_main','state'=>$item["state_main"]])@endcomponent
-                                                            </td>
-                                                            <td>{{$item->date_convert('validity_date')}}</td>
-                                                            <td>{{$item->date_convert()}}</td>
-                                                            <td>
-                                                                <a href="{{route("admin.news.edit",['news'=>$item['id']])}}" class="btn btn-success btn-sm"><i class="fas fa-edit"></i></a>
-                                                                <a href="javascript:void(0)" data-href="{{route("admin.news.destroy",['news'=>$item['id']])}}" class="btn btn-danger btn-sm delete">
-                                                                    <i class="fas fa-trash"></i>
-                                                                </a>
-                                                                <a href="{{route("admin.content.create",['item_id'=>$item['id'],'module'=>'news'])}}" class="btn btn-primary btn-sm">افزودن محتوا
-                                                                    <span
-                                                                        class="badge badge-transparent">{{$item->content()->count()}}</span></a>
-                                                                </a>
+                                                                <a href="{{route("admin.banner.edit",['banner'=>$banner['id']])}}"
+                                                                   class="btn btn-success btn-sm"><i
+                                                                        class="fas fa-edit"></i></a>
+                                                                <a href="javascript:void(0)"
+                                                                   data-href="{{route("admin.banner.destroy",['banner'=>$banner['id']])}}"
+                                                                   class="btn btn-danger btn-sm delete"><i
+                                                                        class="fas fa-trash"></i></a>
                                                             </td>
                                                         </tr>
                                                     @endforeach
+
                                                     </tbody>
                                                 </table>
                                                 <div class="d-flex justify-content-between align-items-center">
@@ -77,31 +72,31 @@
                                                         <button class="btn btn-primary btn-sm" type="submit"
                                                                 name="action_all" value="change_order">تفییر ترتیب
                                                         </button>
-                                                        <br>
-                                                        <br>
-                                                        @component($prefix_component."state_type",['title'=>' صفحه اصلی','name'=>'state_main'])@endcomponent
                                                     </div>
                                                     <div class="col-7 d-flex justify-content-end">
-                                                        {{$news->links()}}
+                                                        {{$banners->links()}}
                                                     </div>
                                                 </div>
                                             @endslot
                                         @endcomponent
                                     @endslot
+
                                     @slot("tabContent1")
                                         @component($prefix_component."form",['method'=>'get'])
                                             @slot("content")
                                                 @component($prefix_component."input",['name'=>'title','title'=>'عنوان','value'=>request()->get("title"),'class'=>'w-50'])@endcomponent
-                                                @component($prefix_component."select_recursive",['name'=>'catid','value'=>request()->get('catid'),'options'=>$news_cats_search,'label'=>'دسته بندی','choose'=>true, 'sub_method'=>'sub_cats'])@endcomponent
+                                                    @component($prefix_component."select",['name'=>'type','title'=>'نوع','class'=>'w-50','items'=>$banner_kind,'value_old'=>request()->get('type')])@endcomponent
                                                 <div class="my-3">
                                                     @component($prefix_component."button",['title'=>'جستجو'])@endcomponent
+
                                                 </div>
                                             @endslot
                                         @endcomponent
                                     @endslot
                                 @endcomponent
                             @else
-                                <div class="alert alert-danger">{{__('common.messages.result_not_found')}}</div>
+                                <div
+                                    class="alert alert-danger">{{__('common.messages.result_not_found')}}</div>
                             @endif
 
 
@@ -112,4 +107,6 @@
         </div>
     </section>
 @endsection
+@section("footer")
 
+@endsection

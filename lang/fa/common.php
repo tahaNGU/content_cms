@@ -60,5 +60,13 @@ return [
     'request_validation'=>[
         'rule'=>'لطفا قوانین و مقررات را انتخاب کنید',
         'confirm_active'=>'کد فعالسازی صحیح نمی باشد',
+    ],
+    'banner_kind'=>[
+        1=>'بنر صفحه اصلی '.getMaxSize('banner_type_1','pic'),
+        2=>'بنر زیر جدید ترین محصولات'.getMaxSize('banner_type_2','pic'),
+    ],
+    'open_type'=>[
+        1=>'همان صفحه',
+        2=>'صفحه جدید'
     ]
 ];

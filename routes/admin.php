@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\bannerController;
 use App\Http\Controllers\admin\comment_controller;
 use App\Http\Controllers\admin\content_controller;
 use App\Http\Controllers\admin\manager_controller;
@@ -28,6 +29,8 @@ Route::middleware("auth:admin")->group(function () {
     Route::post("permission/action_all", [permission_controller::class, "action_all"])->name("permission.action_all");
     Route::resource("comment", comment_controller::class)->except("show","store","create");
     Route::post("comment/action_all", [comment_controller::class, "action_all"])->name("comment.action_all");
+    Route::resource("banner", bannerController::class);
+    Route::post("banner/action_all", [bannerController::class, "action_all"])->name("banner.action_all");
     Route::prefix("content/{item_id}/{module}/")->as("content.")->group(function () {
         Route::get("create", [content_controller::class, 'create'])->name("create");
         Route::post("store", [content_controller::class, 'store'])->name("store");
