@@ -21,13 +21,27 @@ class banner_request extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $rules= [
             'title' => ['required', 'string', 'min:1', 'max:255'],
             'type' => ['required', 'integer', 'min:-128', 'max:127'],
             'open_type' => ['required', 'integer'],
             'pic' => ['nullable', 'mimes:jpeg,png,jpg,gif,svg,webp','max:'.env('MAXIMUM_FILE')],
+            'pic_mobile'=>['nullable','required_if:type,1', 'mimes:jpeg,png,jpg,gif,svg,webp','max:'.env('MAXIMUM_FILE')],
             'alt_pic' => ['nullable', 'string', 'min:1', 'max:255'],
             'address' => ['nullable', 'string', 'min:1', 'max:255']
+        ];
+        if(is_string("pic") && in_array(pathinfo($this->pic,PATHINFO_EXTENSION),['jpeg','png','jpg','gif','svg','webp'])){
+            unset($rules['pic']);
+        }
+        if(is_string("pic_mobile") && in_array(pathinfo($this->pic_mobile,PATHINFO_EXTENSION),['jpeg','png','jpg','gif','svg','webp'])){
+            unset($rules['pic_mobile']);
+        }
+        return $rules;
+    }
+    public function messages()
+    {
+        return [
+            'pic_mobile.required_if'=>'فیلد :attribute اجباری است.',
         ];
     }
 }

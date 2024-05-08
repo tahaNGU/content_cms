@@ -244,5 +244,6 @@ return [
 		"response_note" => "پاسخ",
 		"type" => "نوع",
 		"open_type" => " نوع باز شدن",
+		"pic_mobile" => "تصویر موبایل",
     ]
 ];

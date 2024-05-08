@@ -40,5 +40,6 @@ Route::middleware("auth:admin")->group(function () {
         Route::get("edit", [content_controller::class, 'edit'])->name("edit");
         Route::post("update", [content_controller::class, 'update'])->name("update");
     });
+    Route::resource("comment", comment_controller::class)->except("show","store","create");
 
 });

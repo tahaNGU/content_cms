@@ -17,6 +17,7 @@ trait ResizeImage
             $extension = $filed->getClientOriginalExtension();
             $size_file = $filed->getSize();
             $file_name = time() . $name . "." . $extension;
+
             $filed->move(public_path("upload/" . $module . "/"), $file_name);
             $i = 1;
             $resizes_field_name = $resize_image[$module][$field_name] ?? [];

@@ -36,13 +36,9 @@
                                     @component($prefix_component."button",['title'=>'ارسال'])@endcomponent
                                 @endslot
                             @endcomponent
-
-
                         </div>
                     </div>
-
                 </div>
-
             </div>
         </div>
     </section>

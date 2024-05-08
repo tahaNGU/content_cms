@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 require __DIR__.'/auth.php';
 
-Route::get('main', [\App\Http\Controllers\site\HomeController::class, 'main'])->name('main');
+Route::get('', [\App\Http\Controllers\site\HomeController::class, 'main'])->name('main');
 Route::prefix('/news')->as('news.')->group(function () {
     Route::get('/', [newsController::class, 'index'])->name('index');
     Route::get('/cat/{news_cat:seo_url}', [newsController::class, 'index'])->name('index_cat');
@@ -30,4 +30,5 @@ Route::prefix('/news')->as('news.')->group(function () {
 Route::prefix('comment/{type}/{module_id}')->middleware('auth')->middleware('access')->as('comment.')->group(function (){
     Route::post('/store',[\App\Http\Controllers\site\user\commentController::class,'store'])->name('store');
 });
+Route::get('employment',[\App\Http\Controllers\EmploymentController::class,'show']);
 //Route::get('/show/{model}',[\App\Http\Controllers\site\user\commentController::class,'show'])->name('comment.show');

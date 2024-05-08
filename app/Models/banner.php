@@ -12,7 +12,7 @@ class banner extends Model
 {
     use HasFactory, SoftDeletes, date_convert;
 
-    protected $fillable = ['title', 'pic', 'type', 'alt_pic', 'state', 'order', 'open_type', 'admin_id', 'address'];
+    protected $fillable = ['title', 'pic', 'type', 'alt_pic', 'state', 'order', 'open_type', 'admin_id', 'address','pic_mobile'];
     protected $appends = ['type_name'];
 
     public function getTypeNameAttribute()
