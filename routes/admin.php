@@ -3,6 +3,7 @@
 use App\Http\Controllers\admin\bannerController;
 use App\Http\Controllers\admin\comment_controller;
 use App\Http\Controllers\admin\content_controller;
+use App\Http\Controllers\admin\instagramController;
 use App\Http\Controllers\admin\manager_controller;
 use App\Http\Controllers\admin\news_cat_controller;
 use App\Http\Controllers\admin\news_controller;
@@ -41,5 +42,7 @@ Route::middleware("auth:admin")->group(function () {
         Route::post("update", [content_controller::class, 'update'])->name("update");
     });
     Route::resource("comment", comment_controller::class)->except("show","store","create");
+    Route::resource("instagram", instagramController::class);
+    Route::post("instagram/action_all", [instagramController::class, "action_all"])->name("instagram.action_all");
 
 });

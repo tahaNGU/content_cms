@@ -57,6 +57,13 @@
                     <li><a class="nav-link" href="{{route("admin.comment.index")}}">لیست نظرات</a></li>
                 </ul>
             </li>
+            <li class="dropdown">
+                <a href="#" class="nav-link has-dropdown"><i data-feather="monitor"></i><span>اینستاگرام</span></a>
+                <ul class="dropdown-menu">
+                    <li><a class="nav-link" href="{{route("admin.instagram.create")}}">اینستاگرام جدید</a></li>
+                    <li><a class="nav-link" href="{{route("admin.instagram.index")}}">لیست اینستاگرام</a></li>
+                </ul>
+            </li>
         </ul>
     </aside>
 </div>

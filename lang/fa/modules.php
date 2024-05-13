@@ -10,6 +10,7 @@ return [
         'comment' => 'نظر',
         'product' => 'محصول',
         'banner' => 'بنر',
+        'instagram' => 'اینستاگرام',
     ],
     'module_name_site' => [
         'news' => 'اخبار',

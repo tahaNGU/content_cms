@@ -113,6 +113,13 @@ function resize_image()
                 ],
             ]
         ],
+        'instagram'=>[
+            'pic' => [
+                [
+                    '274' => '264',
+                ],
+            ]
+        ]
 
     ];
 
