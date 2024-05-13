@@ -113,6 +113,13 @@ function resize_image()
                 ],
             ]
         ],
+        'menu_type_1' => [
+            'pic' => [
+                [
+                    '380' => '380',
+                ],
+            ]
+        ],
 
     ];
 

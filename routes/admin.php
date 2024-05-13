@@ -4,6 +4,7 @@ use App\Http\Controllers\admin\bannerController;
 use App\Http\Controllers\admin\comment_controller;
 use App\Http\Controllers\admin\content_controller;
 use App\Http\Controllers\admin\manager_controller;
+use App\Http\Controllers\admin\menuController;
 use App\Http\Controllers\admin\news_cat_controller;
 use App\Http\Controllers\admin\news_controller;
 use App\Http\Controllers\admin\permission_controller;
@@ -41,5 +42,8 @@ Route::middleware("auth:admin")->group(function () {
         Route::post("update", [content_controller::class, 'update'])->name("update");
     });
     Route::resource("comment", comment_controller::class)->except("show","store","create");
+
+    Route::resource("menu", menuController::class);
+    Route::post("menu/action_all", [menuController::class, "action_all"])->name("menu.action_all");
 
 });
