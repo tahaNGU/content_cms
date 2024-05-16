@@ -18,6 +18,7 @@
                                     @component($prefix_component."input",['name'=>'title','title'=>'عنوان','value'=>old('title'),'class'=>'w-50'])@endcomponent
                                     @component($prefix_component."upload_file",['name'=>'pic','title'=>'تصویر','value'=>old('pic'),'class'=>'w-50','module'=>$module])@endcomponent
                                     @component($prefix_component."input",['name'=>'alt_pic','title'=>'alt تصویر','value'=>old('alt_pic'),'class'=>'w-50'])@endcomponent
+                                    @component($prefix_component."input",['name'=>'link','title'=>'لینک','value'=>old('link'),'class'=>'w-50'])@endcomponent
                                     @component($prefix_component."button",['title'=>'ارسال'])@endcomponent
 
                                 @endslot

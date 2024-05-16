@@ -51,12 +51,13 @@ class instagramController extends Controller
     {
         DB::beginTransaction();
         $pic=$this->upload_file($this->module,'pic');
-        DB::commit();
         instagram::create([
             'title'=>$request->title,
             'alt_pic'=>$request->alt_pic,
+            'link'=>$request->link,
             'pic'=>$pic
         ]);
+        DB::commit();
         return back()->with('success', __('common.messages.success', [
             'module' => $this->module_title
         ]));
@@ -67,15 +68,31 @@ class instagramController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $instagram = instagram::find($id);
+        return view($this->view . 'edit', [
+            'module_title' => $this->module_title,
+            'module' => $this->module,
+            'instagram' =>$instagram,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(instagram_request $request, instagram $instagram)
     {
-        //
+        DB::beginTransaction();
+        $pic=$this->upload_file($this->module,'pic');
+        $instagram->update([
+            'title'=>$request->title,
+            'alt_pic'=>$request->alt_pic,
+            'link'=>$request->link,
+            'pic'=>$pic
+        ]);
+        DB::commit();
+        return back()->with('success', __('common.messages.success_edit', [
+            'module' => $this->module_title
+        ]));
     }
 
     /**

@@ -12,12 +12,19 @@ class instagram extends Model
 {
     use HasFactory,SoftDeletes,date_convert;
     protected $table="instagram";
-    protected $fillable=['title','alt_pic','pic','state','state_main','order'];
+    protected $fillable=['title','alt_pic','link','pic','state','state_main','order'];
+    protected $appends=["alt_image"];
     public function scopeFilter(Builder $builder, $params)
     {
         if (!empty($params['title'])) {
             $builder->where('title', 'like', '%' . $params['title'] . '%');
         }
         return $builder;
+    }
+    public function getAltImageAttribute(){
+        if(empty($this->alt_pic)){
+            return $this->title;
+        }
+        return $this->alt_pic;
     }
 }

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('instagram', function (Blueprint $table) {
             $table->id();
             $table->string("title");
+            $table->string("link")->nullable();
             $table->string("pic")->nullable();
             $table->string("alt_pic")->nullable();
             $table->enum("state",["0","1"])->default("0");

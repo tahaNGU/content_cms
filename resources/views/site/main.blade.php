@@ -352,82 +352,38 @@
 
 
         <!-- instagram -->
-        <div class="container-fluid container-instagram">
-            <div class="container-custom">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="section-title">
-                            <div class="title">ما را در اینستاگرام دنبال کنید</div>
-                        </div>
-                        <div class="section-title section-title-2">
-                            <a href="" class="link">Kaveh.bgc <i class="fi fi-rr-instagram"></i></a>
-                        </div>
-
-                        <div class="instagram-items" dir="rtl">
-                            <div class="slide-instagram-item">
-                                <a href="" class="image-box"><img src="{{asset("site/assets/image/blog/blog-01.jpg")}}"
-                                                                  alt=""/></a>
+        @if(isset($instagram_posts[0]))
+            <div class="container-fluid container-instagram">
+                <div class="container-custom">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="section-title">
+                                <div class="title">ما را در اینستاگرام دنبال کنید</div>
+                            </div>
+                            <div class="section-title section-title-2">
+                                <a href="" class="link">Kaveh.bgc <i class="fi fi-rr-instagram"></i></a>
                             </div>
 
-                            <div class="slide-instagram-item">
-                                <a href="" class="image-box"><img src="{{asset("site/assets/image/blog/blog-02.jpg")}}"
-                                                                  alt=""/></a>
-                            </div>
-
-                            <div class="slide-instagram-item">
-                                <a href="" class="image-box"><img src="{{asset("site/assets/image/blog/blog-03.jpg")}}"
-                                                                  alt=""/></a>
-                            </div>
-
-                            <div class="slide-instagram-item">
-                                <a href="" class="image-box"><img src="{{asset("site/assets/image/blog/blog-04.jpg")}}"
-                                                                  alt=""/></a>
-                            </div>
-
-                            <div class="slide-instagram-item">
-                                <a href="" class="image-box"><img src="{{asset("site/assets/image/blog/blog-01.jpg")}}"
-                                                                  alt=""/></a>
-                            </div>
-
-                            <div class="slide-instagram-item">
-                                <a href="" class="image-box"><img src="{{asset("site/assets/image/blog/blog-02.jpg")}}"
-                                                                  alt=""/></a>
-                            </div>
-
-                            <div class="slide-instagram-item">
-                                <a href="" class="image-box"><img src="{{asset("site/assets/image/blog/blog-03.jpg")}}"
-                                                                  alt=""/></a>
-                            </div>
-
-                            <div class="slide-instagram-item">
-                                <a href="" class="image-box"><img src="{{asset("site/assets/image/blog/blog-04.jpg")}}"
-                                                                  alt=""/></a>
-                            </div>
-
-                            <div class="slide-instagram-item">
-                                <a href="" class="image-box"><img src="{{asset("site/assets/image/blog/blog-01.jpg")}}"
-                                                                  alt=""/></a>
-                            </div>
-
-                            <div class="slide-instagram-item">
-                                <a href="" class="image-box"><img src="{{asset("site/assets/image/blog/blog-02.jpg")}}"
-                                                                  alt=""/></a>
-                            </div>
-
-                            <div class="slide-instagram-item">
-                                <a href="" class="image-box"><img src="{{asset("site/assets/image/blog/blog-03.jpg")}}"
-                                                                  alt=""/></a>
-                            </div>
-
-                            <div class="slide-instagram-item">
-                                <a href="" class="image-box"><img src="{{asset("site/assets/image/blog/blog-04.jpg")}}"
-                                                                  alt=""/></a>
+                            <div class="instagram-items" dir="rtl">
+                                @foreach($instagram_posts as $instagram_post)
+                                <div class="slide-instagram-item">
+                                    <a href="{{$instagram_post['link']}}" class="image-box">
+                                        @if($instagram_post['pic'])
+                                            <img src="{{asset("upload/thumb1/".$instagram_post["pic"])}}"
+                                                 alt="{{$instagram_post["alt_image"]}}"/>
+                                        @else
+                                            <img src="{{asset("site/img/no_image/no_image(310x300).jpg")}}"
+                                                 alt="{{$instagram_post["alt_image"]}}"/>
+                                        @endif
+                                    </a>
+                                </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        @endif
         <!--/ instagram -->
     </div>
 @endsection

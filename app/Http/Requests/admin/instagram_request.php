@@ -21,10 +21,15 @@ class instagram_request extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $rules= [
             'title' => ['required', 'string', 'min:1', 'max:255'],
             'pic' => ['nullable', 'mimes:jpeg,png,jpg,gif,svg,webp','max:'.env('MAXIMUM_FILE')],
-            'alt_pic' => ['nullable', 'string', 'min:1', 'max:255']
+            'alt_pic' => ['nullable', 'string', 'min:1', 'max:255'],
+            'link' => ['nullable', 'string', 'min:1', 'max:255'],
         ];
+        if(is_string("pic") && in_array(pathinfo($this->pic,PATHINFO_EXTENSION),['jpeg','png','jpg','gif','svg','webp'])){
+            unset($rules['pic']);
+        }
+        return $rules;
     }
 }
