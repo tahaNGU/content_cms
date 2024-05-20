@@ -6,8 +6,6 @@
 
 @section('content')
     <div class="page-profile">
-
-
         <!-- bread crumb -->
         <div class="container-fluid container-bread-crumb">
             <div class="container-custom">
@@ -31,24 +29,7 @@
             <div class="container-custom">
                 <div class="row">
                     <div class="col-xl-3 col-lg-3 col-md-4 col-12">
-                        <div class="col-side-bar-menu">
-                            <div class="user-data-box">
-                                <div class="image-box"><img src="{{asset('site/assets/image/user.png')}}" alt=""></div>
-
-                                <div class="content-box">
-                                    <div class="name-family">فرناز ارجمند</div>
-                                    <div class="des">خوش آمدید</div>
-                                </div>
-                            </div>
-
-                            <ul class="menu">
-                                <li><a href="#" class="active"><i class="fi fi-rr-apps icon"></i> داشبورد</a></li>
-                                <li><a href="#"><i class="fi fi-rr-heart icon"></i> لیست علاقمندی</a></li>
-                                <li><a href="#"><i class="fi fi-rr-comment icon"></i> نظرات</a></li>
-                                <li><a href="#"><i class="fi fi-rr-edit icon"></i>ویرایش رمز عبور</a></li>
-                                <li><a href="{{route('user.logout')}}" class="sign-out"><i class="fi fi-rr-sign-out icon"></i> خروج</a></li>
-                            </ul>
-                        </div>
+                       @include("site.auth.partials.user_panel")
                     </div>
 
                     <div class="col-xl-9 col-lg-9 col-md-8 col-12">
@@ -62,17 +43,17 @@
                                 <div class="row">
                                     <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                                         <div class="title">نام و نام خانوادگی</div>
-                                        <div class="value">فرناز ارجمند</div>
+                                        <div class="value">{{auth()->user()->fullname}}</div>
                                     </div>
 
                                     <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                                         <div class="title">شماره تلفن همراه</div>
-                                        <div class="value">۰۹۰۱۶۱۵۶۷۸۷</div>
+                                        <div class="value">{{auth()->user()->mobile ?? "--"}}</div>
                                     </div>
 
                                     <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                                         <div class="title">محل سکونت</div>
-                                        <div class="value">تهران</div>
+                                        <div class="value">{{auth()->user()->address ?? "--"}}</div>
                                     </div>
 
                                     <div class="col-lg-4 col-md-6 col-sm-6 col-12">
@@ -82,12 +63,12 @@
 
                                     <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                                         <div class="title">ایمیل</div>
-                                        <div class="value">a.rad@yahoo.com</div>
+                                        <div class="value">{{auth()->user()->email ?? "--"}}</div>
                                     </div>
 
                                     <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                                         <div class="title">شماره ثابت</div>
-                                        <div class="value">۰۲۱-۵۵۴۴۳۳۲۲</div>
+                                        <div class="value">{{auth()->user()->tell ?? "--"}}</div>
                                     </div>
                                 </div>
                             </div>
@@ -98,7 +79,7 @@
                                 <a href="#" class="link-box">
                                     <i class="fi fi-rr-comment icon"></i>
                                     <div class="title">نظرات داده شده</div>
-                                    <div class="count">۷۷ نظر</div>
+                                    <div class="count">{{auth()->user()->comment()->count('id')}} نظر</div>
                                 </a>
                             </div>
 
