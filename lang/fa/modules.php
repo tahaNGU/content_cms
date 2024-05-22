@@ -11,6 +11,7 @@ return [
         'product' => 'محصول',
         'banner' => 'بنر',
         'menu' => 'منو',
+        'product_cat' => 'دسته بندی محصول',
     ],
     'module_name_site' => [
         'news' => 'اخبار',
