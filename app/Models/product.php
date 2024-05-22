@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Trait\date_convert;
+use App\Trait\morph_content;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -10,7 +11,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class product extends Model
 {
-    use HasFactory,SoftDeletes,date_convert;
+    use HasFactory,SoftDeletes,date_convert,morph_content;
+    
 
     protected $appends=['alt_image','alt_banner_image'];
 
