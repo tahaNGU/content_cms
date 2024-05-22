@@ -9,9 +9,9 @@ return [
         'permission' => 'گروه دسترسی',
         'comment' => 'نظر',
         'product' => 'محصول',
+        'product_cat' => 'دسته بندی محصول',
         'banner' => 'بنر',
         'menu' => 'منو',
-        'product_cat' => 'دسته بندی محصول',
     ],
     'module_name_site' => [
         'news' => 'اخبار',

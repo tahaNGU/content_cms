@@ -19,7 +19,7 @@ class admin_controller
 
     private function delete_all($model, $request)
     {
-        $model::whereIn('id', $request->item)->where("admin_id","1")->delete();
+        $model::whereIn('id', $request->item)->where("admin_id",auth()->user()->id)->delete();
         return true;
     }
 

@@ -8,12 +8,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class product_cat extends Model
+class product extends Model
 {
-    use HasFactory, date_convert,SoftDeletes;
+    use HasFactory,SoftDeletes,date_convert;
 
-  
-    protected $fillable=[
+    protected $appends=['alt_image','alt_banner_image'];
+
+    protected $fillable = [
+        'admin_id',
         'seo_title',
         'seo_url',
         'seo_h1',
@@ -23,7 +25,6 @@ class product_cat extends Model
         'seo_index_kind',
         'seo_keyword',
         'seo_description',
-        'admin_id',
         'title',
         'catid',
         'pic',
@@ -32,23 +33,32 @@ class product_cat extends Model
         'alt_pic_banner',
         'order',
         'state',
+        'note',
+        'note_more',
+        'state_main',
     ];
 
-    public function sub_cats(){
-        return $this->hasMany(product_cat::class,'catid')->select("id","title","catid");
+    public function getAltImageAttribute()
+    {
+        return !empty($this->alt_pic) ? $this->alt_pic : $this->title;
+    }
+
+    public function getAltImageBannerAttribute()
+    {
+        return !empty($this->alt_pic_banner) ? $this->alt_pic_banner : $this->title;
+    }
+
+    public function product_cat(){
+        return $this->belongsTo(product_cat::class,'catid')->select('id','title','catid');
     }
 
     public function scopeFilter(Builder $builder,$params){
         if(!empty($params['catid'])){
-            $builder->where("catid",$params["catid"]);
-        }else{
-            $builder->where("catid",'0');
+            $builder->where('catid',$params['catid']);
         }
         if(!empty($params['title'])){
-            $builder->where('title', 'like', '%' . $params["title"] . '%');
+            $builder->where('title','like','%' .$params['title']. '%');
         }
         return $builder;
     }
-
-
 }
