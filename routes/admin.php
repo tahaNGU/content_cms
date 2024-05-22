@@ -5,10 +5,13 @@ use App\Http\Controllers\admin\comment_controller;
 use App\Http\Controllers\admin\content_controller;
 use App\Http\Controllers\admin\instagramController;
 use App\Http\Controllers\admin\manager_controller;
+use App\Http\Controllers\admin\menuController;
 use App\Http\Controllers\admin\news_cat_controller;
 use App\Http\Controllers\admin\news_controller;
 use App\Http\Controllers\admin\permission_controller;
 use App\Http\Controllers\admin\premission;
+use App\Http\Controllers\admin\product_cat_controller;
+use App\Http\Controllers\admin\product_controller;
 use App\Http\Controllers\admin\province_city_controller;
 use \Illuminate\Support\Facades\Route;
 
@@ -44,5 +47,17 @@ Route::middleware("auth:admin")->group(function () {
     Route::resource("comment", comment_controller::class)->except("show","store","create");
     Route::resource("instagram", instagramController::class);
     Route::post("instagram/action_all", [instagramController::class, "action_all"])->name("instagram.action_all");
+
+    Route::resource("menu", menuController::class);
+    Route::post("menu/action_all", [menuController::class, "action_all"])->name("menu.action_all");
+
+
+    Route::resource("product_cat",product_cat_controller::class)->except("show");
+    Route::post("product_cat/action_all",[product_cat_controller::class,"action_all"])->name("product_cat.action_all");
+
+
+    Route::resource("product",product_controller::class)->except("show");
+    Route::post("product/action_all",[product_controller::class,"action_all"])->name("product.action_all");
+
 
 });

@@ -1,7 +1,8 @@
 <div class="main-sidebar sidebar-style-2">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
-            <a href="javascript:void(0)"> <img alt="تصویر" src="{{asset("admin/assets/img/logo.png")}}" class="header-logo"> <span
+            <a href="javascript:void(0)"> <img alt="تصویر" src="{{asset("admin/assets/img/logo.png")}}"
+                                               class="header-logo"> <span
                     class="logo-name">اجیس</span>
             </a>
         </div>
@@ -38,6 +39,13 @@
                 </ul>
             </li>
             <li class="dropdown">
+                <a href="#" class="nav-link has-dropdown"><i data-feather="monitor"></i><span>منو</span></a>
+                <ul class="dropdown-menu">
+                    <li><a class="nav-link" href="{{route("admin.menu.create")}}">منو جدید</a></li>
+                    <li><a class="nav-link" href="{{route("admin.menu.index")}}">لیست منو ها</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
                 <a href="#" class="nav-link has-dropdown"><i data-feather="monitor"></i><span>دسته بندی اخبار</span></a>
                 <ul class="dropdown-menu">
                     <li><a class="nav-link" href="{{route("admin.news_cat.create")}}">دسته بندی اخبار جدید</a></li>
@@ -62,6 +70,21 @@
                 <ul class="dropdown-menu">
                     <li><a class="nav-link" href="{{route("admin.instagram.create")}}">اینستاگرام جدید</a></li>
                     <li><a class="nav-link" href="{{route("admin.instagram.index")}}">لیست اینستاگرام</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="nav-link has-dropdown"><i
+                        data-feather="monitor"></i><span>دسته بندی محصولات</span></a>
+                <ul class="dropdown-menu">
+                    <li><a class="nav-link" href="{{route("admin.product_cat.create")}}">دسته بندی محصول جدید</a></li>
+                    <li><a class="nav-link" href="{{route("admin.product_cat.index")}}">لیست دسته بندی محصولات</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="nav-link has-dropdown"><i data-feather="monitor"></i><span> محصولات</span></a>
+                <ul class="dropdown-menu">
+                    <li><a class="nav-link" href="{{route("admin.product.create")}}">محصول جدید</a></li>
+                    <li><a class="nav-link" href="{{route("admin.product.index")}}">لیست محصولات</a></li>
                 </ul>
             </li>
         </ul>

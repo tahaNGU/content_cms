@@ -67,6 +67,10 @@ return [
         1=>'بنر صفحه اصلی '.getMaxSize('banner_type_1','pic'),
         2=>'بنر زیر جدید ترین محصولات'.getMaxSize('banner_type_2','pic'),
     ],
+    'menu_kind'=>[
+        1=>'هدر سایت',
+        2=>'فوتر سایت',
+    ],
     'open_type'=>[
         1=>'همان صفحه',
         2=>'صفحه جدید'

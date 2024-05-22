@@ -9,8 +9,10 @@ return [
         'permission' => 'گروه دسترسی',
         'comment' => 'نظر',
         'product' => 'محصول',
+        'product_cat' => 'دسته بندی محصول',
         'banner' => 'بنر',
         'instagram' => 'اینستاگرام',
+        'menu' => 'منو',
     ],
     'module_name_site' => [
         'news' => 'اخبار',
