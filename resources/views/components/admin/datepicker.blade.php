@@ -7,8 +7,7 @@
                 <i class="fas fa-calendar"></i>
             </div>
         </div>
-        <input type="text" class="form-control datepicker-Depart" @if(isset($value[0])) value="{{$value[0]}}" @endif autocomplete="off" @if($hour_minute)name="{{$name}}[0]"@else name="{{$name}}" @endif
-              >
+        <input type="text" class="form-control datepicker-Depart" @if(isset($value[0])) value="{{$value[0]}}" @endif autocomplete="off" @if($hour_minute)name="{{$name}}[0]"@else name="{{$name}}" @endif>
         @if($hour_minute)
             <div class="d-flex">
                 <select name="{{$name}}[1]" id="hour_{{$name}}" class="form-control">

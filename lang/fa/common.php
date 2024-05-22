@@ -20,7 +20,8 @@ return [
         'success'=>':module جدید ساخته شد',
         'success_edit'=>':module ویرایش شد',
         'result_not_found'=>"نتیجه ای یافت نشد",
-        'email_success'=>'ایمیل شما با موفقیت ارسال شد'
+        'email_success'=>'ایمیل شما با موفقیت ارسال شد',
+
     ],
 
     'state'=>[
@@ -55,6 +56,7 @@ return [
         'success_delete'=>"حذف با موفقیت انجام شد",
         'yes'=>"بله",
         'no'=>"خیر",
+        'success'=>"با موفقیت انجام شد",
     ],
 
     'request_validation'=>[

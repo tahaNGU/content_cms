@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\province;
 use App\Rules\subid_in_catid;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Config;
@@ -23,11 +24,12 @@ class AppServiceProvider extends ServiceProvider
         });
         Paginator::useBootstrapFour();
 
-
-//
-//        Validator::extend('contains_laravel', function ($attribute, $value, $parameters, $validator) {
-//            return (new subid_in_catid())->passes($attribute, $value);
-//        });
+        View::composer(["site.auth.user.change_profile"],function ($view){
+            $view->with([
+                'provinces'=>province::all(),
+                'genders'=>trans("common.gender")
+            ]);
+        });
     }
 
     /**

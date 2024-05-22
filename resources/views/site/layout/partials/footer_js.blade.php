@@ -7,4 +7,6 @@
 <script type="text/javascript" src="{{asset('site/assets/js/libs/select2.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('site/assets/js/libs/select2-fa.js')}}"></script>
 <script type="text/javascript" src="{{asset('site/assets/js/libs/persianumber.js')}}"></script>
+<script type="text/javascript" src="{{asset('site/assets/js/libs/datepicker.js')}}"></script>
+<script type="text/javascript" src="{{asset('site/assets/js/libs/datepicker-fa.js')}}"></script>
 <script type="text/javascript" src="{{asset('site/assets/js/main.js')}}"></script>

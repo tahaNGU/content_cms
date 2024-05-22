@@ -7,12 +7,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Morilog\Jalali\Jalalian;
 
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $appends=["fullname"];
+    protected $appends=["fullname","date_birth_convert"];
     /**
      * The attributes that are mass assignable.
      *
@@ -25,8 +26,19 @@ class User extends Authenticatable
         'email',
         'state',
         'password',
+        'new_password',
         'confirm_code',
         'expire_confirm_at',
+        'national_code',
+        'gender',
+        'date_birth',
+        'date',
+        'mobile',
+        'email',
+        'postal_code',
+        'province',
+        'city',
+        'address',
     ];
 
     /**
@@ -52,4 +64,13 @@ class User extends Authenticatable
     public function getFullnameAttribute(){
         return $this->name." ".$this->lastname;
     }
+
+    public function comment(){
+        return $this->hasMany(comment::class,'user_id');
+    }
+
+    public function getdateBirthConvertAttribute(){
+        return Jalalian::forge($this->date_birth)->format('Y-m-d');
+    }
+
 }

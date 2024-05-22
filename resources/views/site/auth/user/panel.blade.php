@@ -36,7 +36,7 @@
                         <div class="section-content-box">
                             <div class="section-title">
                                 <span class="title">اطلاعات کاربری</span>
-                                <a href="#" class="btn-custom"><i class="fi fi-rr-edit icon"></i> ویرایش</a>
+                                <a href="{{route('user.change_profile')}}" class="btn-custom"><i class="fi fi-rr-edit icon"></i> ویرایش</a>
                             </div>
 
                             <div class="content-box content-box">

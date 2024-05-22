@@ -43,6 +43,7 @@
                 method: "get",
                 success: function (res) {
                     $(".result_comment").html(res)
+                    console.log(res)
                     $('html, body').scrollTop($(".comment-box").offset().top);
 
                 },
@@ -52,10 +53,4 @@
             })
         }
     })
-    $(".increaseLike").click(function () {
-
-    })
-
-
-
 </script>

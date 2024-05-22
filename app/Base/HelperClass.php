@@ -179,15 +179,25 @@ if (!function_exists('check_mobile')) {
 }
 
 if (!function_exists('code_string')) {
-    function code_string($value){
+    function code_string($value)
+    {
         return base64_encode(base64_encode($value));
     }
 }
 
 
-
 if (!function_exists('decode_string')) {
-    function decode_string($value){
+    function decode_string($value)
+    {
         return base64_decode(base64_decode($value));
     }
 }
+
+if (!function_exists('convert_to_timestamp')) {
+    function convert_to_timestamp($date_persian)
+    {
+        $test = explode("-", $date_persian);
+        return (new \Morilog\Jalali\Jalalian(... $test))->getTimestamp();
+    }
+}
+

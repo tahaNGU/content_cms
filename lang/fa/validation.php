@@ -245,5 +245,9 @@ return [
 		"type" => "نوع",
 		"open_type" => " نوع باز شدن",
 		"pic_mobile" => "تصویر موبایل",
+		"national_code" => "کد ملی",
+		"date_birth" => "تاریخ تولد",
+		"before_password" => "رمز قبلی",
+		"new_password" => "رمز جدید",
     ]
 ];

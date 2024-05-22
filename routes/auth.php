@@ -71,9 +71,14 @@ Route::middleware('guest')->as('auth.')->group(function () {
 });
 
 Route::middleware('auth')->as('user.')->group(function () {
+    Route::get('change_profile',[\App\Http\Controllers\site\user\panelController::class,'change_profile'])->name('change_profile');
+    Route::post('change_profile',[\App\Http\Controllers\site\user\panelController::class,'change_profile_store'])->name('change_profile_store');
     Route::get('panel',[\App\Http\Controllers\site\user\panelController::class,'index'])->name('panel');
+    Route::get('comment',[\App\Http\Controllers\site\user\panelController::class,'comment'])->name('comment');
+    Route::post('change_pass',[\App\Http\Controllers\site\user\panelController::class,'change_pass'])->name('change_pass');
     Route::get('logout',[\App\Http\Controllers\site\user\panelController::class,'logout'])->name('logout');
 });
+
 
 
 
