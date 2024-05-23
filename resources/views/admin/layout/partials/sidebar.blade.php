@@ -39,6 +39,12 @@
                 </ul>
             </li>
             <li class="dropdown">
+                <a href="#" class="nav-link has-dropdown"><i data-feather="monitor"></i><span>کاربران</span></a>
+                <ul class="dropdown-menu">
+                    <li><a class="nav-link" href="{{route("admin.user.index")}}">لیست کاربران</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
                 <a href="#" class="nav-link has-dropdown"><i data-feather="monitor"></i><span>منو</span></a>
                 <ul class="dropdown-menu">
                     <li><a class="nav-link" href="{{route("admin.menu.create")}}">منو جدید</a></li>
