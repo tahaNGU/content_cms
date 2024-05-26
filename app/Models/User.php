@@ -42,6 +42,7 @@ class User extends Authenticatable
         'province',
         'city',
         'address',
+        'tell',
     ];
 
     /**
@@ -94,4 +95,5 @@ class User extends Authenticatable
         }
         return $builder;
     }
+
 }

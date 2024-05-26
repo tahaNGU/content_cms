@@ -118,6 +118,12 @@
                                                         @error("city")<span class="text text-danger">{{$errors->first('city')}}</span>@enderror
                                                     </div>
                                                 </div>
+                                                <div class="col-lg-12 col-md-12 col-sm- col-12">
+                                                    <div class="input-box">
+                                                        <input placeholder="تلفن ثابت (اختیاری)" type="text" name="tell" value="{{auth()->user()->tell ?? old("tell")}}" class="form-input">
+                                                        @error("tell")<span class="text text-danger">{{$errors->first('tell')}}</span>@enderror
+                                                    </div>
+                                                </div>
                                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                                     <div class="input-box">
                                                         <textarea name="address" class="form-textarea" rows="3" placeholder="نشانی (اجباری)">{{auth()->user()->address ?? old("address")}}</textarea>
