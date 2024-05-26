@@ -194,9 +194,9 @@ if (!function_exists('decode_string')) {
 }
 
 if (!function_exists('convert_to_timestamp')) {
-    function convert_to_timestamp($date_persian)
+    function convert_to_timestamp($date_persian, $separator="-")
     {
-        $test = explode("-", $date_persian);
+        $test = explode($separator, $date_persian);
         return (new \Morilog\Jalali\Jalalian(... $test))->getTimestamp();
     }
 }
