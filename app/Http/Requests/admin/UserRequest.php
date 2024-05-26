@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Requests\site;
+namespace App\Http\Requests\admin;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 
-class change_profile_user_request extends FormRequest
+class UserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,7 +22,7 @@ class change_profile_user_request extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $rules= [
             'name'=>['required','string','min:3','max:255'],
             'lastname'=>['required','string','min:3','max:255'],
             'national_code'=>['required','string','max:10','regex:/^[0-9]{10}$/'],
@@ -32,15 +33,14 @@ class change_profile_user_request extends FormRequest
             'province'=>['required','exists:provinces,id'],
             'city'=>['required','exists:cities,id'],
             'address'=>['required','string','min:5','max:255'],
-            'date_birth'=>['required','string','regex:/^[0-9]{4}\-[0-9]{2}\-[0-9]{2}$/'],
-            'tell'=>['nullable','min:11','string']
+            'date_birth'=>['required','string','regex:/^[0-9]{4}\/[0-9]{2}\/[0-9]{2}$/'],
+            'tell'=>['nullable','min:11','string'],
+            'password'=>['nullable','min:8']
         ];
+        return $rules;
     }
-
-    public function messages()
-    {
-        return [
-            'national_code.regex'=>'کد ملی اشتباه است'
-        ];
-    }
+//    protected function failedValidation(Validator $validator)
+//    {
+//        dd($validator->errors());
+//    }
 }
