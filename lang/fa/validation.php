@@ -249,5 +249,6 @@ return [
 		"date_birth" => "تاریخ تولد",
 		"before_password" => "رمز قبلی",
 		"new_password" => "رمز جدید",
+		"alt_pic" => " alt تصویر ",
     ]
 ];

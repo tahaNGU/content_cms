@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\admin\content_request;
 use App\Models\content;
 use App\Models\news;
+use App\Models\page;
 use App\Trait\ResizeImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -182,7 +183,8 @@ class content_controller extends Controller
     private function modal_content()
     {
         return [
-            'news' => news::class
+            'news' => news::class,
+            'page' => page::class,
         ];
     }
 }

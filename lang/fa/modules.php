@@ -13,7 +13,8 @@ return [
         'banner' => 'بنر',
         'instagram' => 'اینستاگرام',
         'menu' => 'منو',
-        'user'=>'کاربران'
+        'user'=>'کاربران',
+        'page'=>'صفحه',
     ],
     'module_name_site' => [
         'news' => 'اخبار',

@@ -27,7 +27,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $users = User::filter($request->all())->paginate(5);
+        $users = User::filter($request->all())->paginate(5)->withQueryString();
         return view("admin.module.user.list", [
             'module_title' => $this->module_title,
             'module' => $this->module,

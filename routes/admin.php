@@ -14,6 +14,7 @@ use App\Http\Controllers\admin\product_cat_controller;
 use App\Http\Controllers\admin\product_controller;
 use App\Http\Controllers\admin\province_city_controller;
 use App\Http\Controllers\admin\UserController;
+use App\Http\Controllers\admin\pagesController;
 use \Illuminate\Support\Facades\Route;
 
 include "auth_admin.php";
@@ -63,4 +64,6 @@ Route::middleware("auth:admin")->group(function () {
     Route::resource("user",UserController::class)->except("show","create","store");
     Route::post("user/action_all",[UserController::class,"action_all"])->name("user.action_all");
 
+    Route::resource("page",pagesController::class)->except("show");
+    Route::post("page/action_all",[pagesController::class,"action_all"])->name("page.action_all");
 });

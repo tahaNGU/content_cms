@@ -52,6 +52,13 @@
                 </ul>
             </li>
             <li class="dropdown">
+                <a href="#" class="nav-link has-dropdown"><i data-feather="monitor"></i><span>صفحات</span></a>
+                <ul class="dropdown-menu">
+                    <li><a class="nav-link" href="{{route("admin.page.create")}}">صفحه جدید</a></li>
+                    <li><a class="nav-link" href="{{route("admin.page.index")}}">لیست صفحه ها</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
                 <a href="#" class="nav-link has-dropdown"><i data-feather="monitor"></i><span>دسته بندی اخبار</span></a>
                 <ul class="dropdown-menu">
                     <li><a class="nav-link" href="{{route("admin.news_cat.create")}}">دسته بندی اخبار جدید</a></li>
