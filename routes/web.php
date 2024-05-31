@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 require __DIR__.'/auth.php';
 
 Route::get('', [\App\Http\Controllers\site\HomeController::class, 'main'])->name('main');
+Route::get('about', [\App\Http\Controllers\site\HomeController::class, 'about'])->name('about');
 Route::prefix('/news')->as('news.')->group(function () {
     Route::get('/', [newsController::class, 'index'])->name('index');
     Route::get('/cat/{news_cat:seo_url}', [newsController::class, 'index'])->name('index_cat');

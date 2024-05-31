@@ -35,6 +35,7 @@ class pageRequest extends FormRequest
             'pic' => ['nullable', 'mimes:jpeg,png,jpg,gif,svg,webp','max:'.env('MAXIMUM_FILE')],
             'alt_pic'=>['nullable','string','min:0','max:255'],
             'kind'=>['required','integer'],
+            'note'=>['nullable'],
         ];
         if(is_string("pic") && in_array(pathinfo($this->pic,PATHINFO_EXTENSION),['jpeg','png','jpg','gif','svg','webp'])){
             unset($rules['pic']);
