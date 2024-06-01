@@ -169,20 +169,9 @@
                 <form action="{{route('comment.store',['type'=>'news','module_id'=>$news['id']])}}" method="post"
                       class="form form_comment">
                     <div class="modal-body">
-                        {{--                        <div class="row">--}}
-                        {{--                            <div class="col-12">--}}
-                        {{--                                <div class="score-box">--}}
-                        {{--                                    <div class="title">امتیاز شما</div>--}}
-                        {{--                                    <div class="star-box">--}}
-                        {{--                                        <i class="fi fi-rr-star-fill"></i>--}}
-                        {{--                                        <i class="fi fi-rr-star-fill"></i>--}}
-                        {{--                                        <i class="fi fi-rr-star-fill"></i>--}}
-                        {{--                                        <i class="fi fi-rr-star-fill"></i>--}}
-                        {{--                                        <i class="fi fi-rr-star-fill"></i>--}}
-                        {{--                                    </div>--}}
-                        {{--                                </div>--}}
-                        {{--                            </div>--}}
-                        {{--                        </div>--}}
+                        <div class="big_stars" style="display: flex; cursor: pointer;">
+
+                        </div>
                         @csrf
                         <div class="row">
                             <div class="col-12">
@@ -220,8 +209,42 @@
             myModal.show();
         };
 
+
+
     </script>
     @enderror
-
+    <script>
+        $(function() {
+            $.fn.raty.defaults.path = '{{asset("site/assets/image/")}}';
+            $('.big_stars').raty({
+                space:false,
+                starOff: 'star-big-off.png',
+                starOn: 'star-big-on.png',
+                noRatedMsg: '! بدون امتیاز',
+                hints: ['بد', 'ضعیف', 'عادی', 'خوب', 'عالی'],
+                score: function() {
+                    return $(this).attr('data-score');
+                },
+                click: function(score, evt) {
+                    $.ajaxSetup({
+                        headers:
+                            { 'X-CSRF-TOKEN': $('[name="_token"]').val() }
+                    });
+                    $.ajax({
+                        url:"{{route('rate',['module'=>'news','item_id'=>$news["id"]])}}",
+                        method:"post",
+                        dataType:"json",
+                        data:{"rate":score},
+                        success:function (response) {
+                            console.log(response)
+                        },
+                        // error:function () {
+                        //
+                        // }
+                    });
+                }
+            });
+        });
+    </script>
 @endsection
 

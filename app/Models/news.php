@@ -6,6 +6,7 @@ use App\Trait\date_convert;
 use App\Trait\morph_content;
 use App\Trait\Comment;
 use App\Trait\seo;
+use App\Trait\Rate;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -16,7 +17,7 @@ use Morilog\Jalali\Jalalian;
 
 class news extends Model
 {
-    use HasFactory, SoftDeletes, date_convert, morph_content,seo,Comment;
+    use HasFactory, SoftDeletes, date_convert, morph_content,seo,Comment,Rate;
 
     protected $appends = ['validate_date_admin', 'short_note', 'alt_image','url'];
     protected $fillable = [

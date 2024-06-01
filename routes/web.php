@@ -15,22 +15,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 Route::get('', [\App\Http\Controllers\site\HomeController::class, 'main'])->name('main');
 Route::get('about', [\App\Http\Controllers\site\HomeController::class, 'about'])->name('about');
 Route::prefix('/news')->as('news.')->group(function () {
     Route::get('/', [newsController::class, 'index'])->name('index');
     Route::get('/cat/{news_cat:seo_url}', [newsController::class, 'index'])->name('index_cat');
-    Route::get('/{news:seo_url}',[newsController::class,'show'])->name('show');
-    Route::post('/news_send_email/{id}',[newsController::class,'mail'])->name('mail');
-    Route::get('/{news:seo_url}/print',[newsController::class,'show'])->name('print');
+    Route::get('/{news:seo_url}', [newsController::class, 'show'])->name('show');
+    Route::post('/news_send_email/{id}', [newsController::class, 'mail'])->name('mail');
+    Route::get('/{news:seo_url}/print', [newsController::class, 'show'])->name('print');
 });
 
 
-Route::prefix('comment/{type}/{module_id}')->middleware('auth')->middleware('access')->as('comment.')->group(function (){
-    Route::post('/store',[\App\Http\Controllers\site\user\commentController::class,'store'])->name('store');
+Route::prefix('comment/{type}/{module_id}')->middleware('auth')->middleware('access')->as('comment.')->group(function () {
+    Route::post('/store', [\App\Http\Controllers\site\user\commentController::class, 'store'])->name('store');
 });
-Route::get('pages/{pages}',[\App\Http\Controllers\site\pageController::class,'page'])->name("page");
-// Route::get('employment',[\App\Http\Controllers\EmploymentController::class,'show']);
+Route::post('rate/{module}/{item_id}', [\App\Http\Controllers\site\RateController::class, 'store'])->name("rate")->middleware('auth');
+Route::get('pages/{pages}', [\App\Http\Controllers\site\pageController::class, 'page'])->name("page");
 //Route::get('/show/{model}',[\App\Http\Controllers\site\user\commentController::class,'show'])->name('comment.show');
