@@ -13,6 +13,7 @@ use App\Http\Controllers\admin\premission;
 use App\Http\Controllers\admin\product_cat_controller;
 use App\Http\Controllers\admin\product_controller;
 use App\Http\Controllers\admin\province_city_controller;
+use App\Http\Controllers\admin\roleController;
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\admin\pagesController;
 use \Illuminate\Support\Facades\Route;
@@ -31,8 +32,6 @@ Route::middleware("auth:admin")->group(function () {
     Route::post("news/action_all", [news_controller::class, "action_all"])->name("news.action_all");
     Route::resource("manager", manager_controller::class)->except("show");
     Route::post("manager/action_all", [manager_controller::class, "action_all"])->name("manager.action_all");
-    Route::resource("permission", permission_controller::class)->except("show");
-    Route::post("permission/action_all", [permission_controller::class, "action_all"])->name("permission.action_all");
     Route::resource("comment", comment_controller::class)->except("show","store","create");
     Route::post("comment/action_all", [comment_controller::class, "action_all"])->name("comment.action_all");
     Route::resource("banner", bannerController::class);
@@ -66,4 +65,8 @@ Route::middleware("auth:admin")->group(function () {
 
     Route::resource("page",pagesController::class)->except("show");
     Route::post("page/action_all",[pagesController::class,"action_all"])->name("page.action_all");
+
+    Route::resource("role",roleController::class)->except("show");
+    Route::post("role/action_all",[roleController::class,"action_all"])->name("role.action_all");
+
 });

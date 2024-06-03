@@ -20,8 +20,8 @@
             <li class="dropdown">
                 <a href="#" class="nav-link has-dropdown"><i data-feather="user"></i><span>گروه دسترسی مدیران</span></a>
                 <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="{{route('admin.permission.create')}}">گروه دسترسی جدید</a></li>
-                    <li><a class="nav-link" href="{{route('admin.permission.index')}}">لیست گروه دسترسی</a></li>
+                    <li><a class="nav-link" href="{{route('admin.role.create')}}">گروه دسترسی جدید</a></li>
+                    <li><a class="nav-link" href="{{route('admin.role.index')}}">لیست گروه دسترسی</a></li>
                 </ul>
             </li>
             <li class="dropdown">
