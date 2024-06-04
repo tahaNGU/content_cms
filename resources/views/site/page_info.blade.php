@@ -3,11 +3,8 @@
     <link rel="stylesheet" href="{{asset('site/assets/css/pages/page-05.css')}}">
     <link rel="stylesheet" href="{{asset('site/assets/css/pages/page-07-01.css')}}">
 @endsection
-
 @section('content')
     <div class="page-about ">
-
-
         <!-- bread crumb -->
         <div class="container-fluid container-bread-crumb">
             <div class="container-custom">
