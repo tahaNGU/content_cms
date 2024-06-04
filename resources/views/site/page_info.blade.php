@@ -14,7 +14,6 @@
                 <div class="row">
                     <div class="col">
                         <h1 class="page-title">{{$page["title"]}}</h1>
-
                         <ul class="bread-crumb">
                             <li><a href="#">صفحه اصلی</a></li>
                             <li><a href="#">{{$page["title"]}}</a></li>
