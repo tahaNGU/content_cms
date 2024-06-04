@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('permission', function (Blueprint $table) {
-            $table->id();
-            $table->string("name");
-            $table->enum( "check_all",["0","1"])->default("0");
-            $table->json("access");
-            $table->integer("admin_id")->default("1");
-            $table->softDeletes();
-            $table->timestamps();
-        });
+        // Schema::create('permission', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->string("name");
+        //     $table->enum( "check_all",["0","1"])->default("0");
+        //     $table->json("access");
+        //     $table->integer("admin_id")->default("1");
+        //     $table->softDeletes();
+        //     $table->timestamps();
+        // });
     }
 
     /**
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('permission');
+        // Schema::dropIfExists('permission');
     }
 };

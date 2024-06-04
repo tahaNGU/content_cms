@@ -23,7 +23,7 @@
                                             @component($prefix_component."input",['name'=>'title','title'=>'عنوان','value'=>old('title'),'class'=>'w-50'])@endcomponent
                                             @component($prefix_component."select_recursive",['name'=>'catid','options'=>$news_cats,'label'=>'دسته بندی','first_option'=>'دسته بندی اصلی', 'sub_method'=>'sub_cats','value'=>old('catid')])@endcomponent
                                             @component($prefix_component."upload_file",['name'=>'pic_banner','title'=>'تصویر بنر','value'=>old('pic_banner'),'class'=>'w-50','module'=>$module])@endcomponent
-                                            @component($prefix_component."input",['name'=>'alt_pic','title'=>'alt تصویر','value'=>old('alt_pic'),'class'=>'w-50'])@endcomponentظظ
+                                            @component($prefix_component."input",['name'=>'alt_pic','title'=>'alt تصویر','value'=>old('alt_pic'),'class'=>'w-50'])@endcomponent
                                         @endslot
                                     @endcomponent
                                     @component($prefix_component."button",['title'=>'ارسال'])@endcomponent

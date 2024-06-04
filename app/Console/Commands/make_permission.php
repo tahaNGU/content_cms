@@ -27,12 +27,12 @@ class make_permission extends Command
     public function handle()
     {
         $modules = trans('modules.module_name');
-        $crud = ["create", "read", "delete", "update"];
+        $crud = array_keys(trans('modules.crud'));
 //        unset($modules["permission"]);
         foreach ($modules as $key => $module) {
             array_map(function ($item) use ($key) {
                 permissions::insertOrIgnore([
-                    "title" => $item."-" . $key,
+                    "title" => $item,
                     "module"=>$key
                 ]);
                 dump($item."-" . $key);

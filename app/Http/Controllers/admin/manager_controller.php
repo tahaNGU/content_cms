@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\admin\manager_request;
 use App\Models\admin;
 use App\Models\province;
+use App\Models\role;
 use App\Trait\ResizeImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -33,10 +34,12 @@ class manager_controller extends Controller
      */
     public function index(Request $request)
     {
+        $roles=role::select('id','title')->get();
         $manager = admin::where('is_main', '0')->filter($request->all())->paginate(5)->withQueryString();
         return view($this->view . "list", [
             'manager' => $manager,
-            'module_title' => $this->module_title
+            'module_title' => $this->module_title,
+            'roles' => $roles,
         ]);
     }
 
@@ -45,11 +48,13 @@ class manager_controller extends Controller
      */
     public function create()
     {
-        $provinces = province::select('id', 'name')->where('state', '1')->get();
+        $provinces=province::select('id', 'name')->where('state', '1')->get();
+        $roles=role::select('id','title')->get();
         return view($this->view . "new", [
             'module_title' => $this->module_title,
             'module' => $this->module,
             'provinces' => $provinces,
+            'roles' => $roles,
         ]);
     }
 
@@ -69,6 +74,7 @@ class manager_controller extends Controller
             'password' => Hash::make($request->password),
             'province' => $request->province,
             'city' => $request->city,
+            'role_id' => $request->role_id,
             'pic' => $pic,
         ]);
         DB::commit();
@@ -84,11 +90,13 @@ class manager_controller extends Controller
     public function edit(admin $manager)
     {
         $provinces = province::select('id', 'name')->where('state', '1')->get();
+        $roles=role::select('id','title')->get();
         return view($this->view . "edit", [
             'module_title' => $this->module_title,
             'module' => $this->module,
             'provinces' => $provinces,
             'manager' => $manager,
+            'roles' => $roles,
         ]);
     }
 
@@ -106,6 +114,7 @@ class manager_controller extends Controller
             'username' => $request->username,
             'province' => $request->province,
             'city' => $request->city,
+            'role_id' => $request->role_id,
             'pic' => $pic,
         ]);
         DB::commit();

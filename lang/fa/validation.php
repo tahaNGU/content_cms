@@ -250,5 +250,7 @@ return [
 		"before_password" => "رمز قبلی",
 		"new_password" => "رمز جدید",
 		"alt_pic" => " alt تصویر ",
-    ]
+		"permissions" => "سطح دسترسی",
+        "role_id" => "سطح دسترسی",
+        ]
 ];

@@ -27,6 +27,7 @@ class admin extends Authenticatable
         'province',
         'is_main',
         'password',
+        'role_id',
     ];
 
     /**
@@ -53,6 +54,14 @@ class admin extends Authenticatable
         if(!empty($params["email"])){
             $builder->where('email', 'like', '%' . $params["email"] . '%');
         }
+        if(!empty($params["role_id"])){
+            $builder->where('role_id',$params["role_id"]);
+        }
         return $builder;
+    }
+
+
+    public function role(){
+        return $this->belongsTo(role::class,"role_id");
     }
 }

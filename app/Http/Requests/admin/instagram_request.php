@@ -3,6 +3,7 @@
 namespace App\Http\Requests\admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 
 class instagram_request extends FormRequest
 {
@@ -11,8 +12,12 @@ class instagram_request extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        if(Gate::allows("create_instagram")){
+            return true;
+        }
+        return false;
     }
+
 
     /**
      * Get the validation rules that apply to the request.

@@ -46,6 +46,7 @@
                                                             <td><input type="text" value="{{$item["order"]}}" class="input-order" name="order[{{$item['id']}}]"></td>
                                                             <td>
                                                                 @component($prefix_component."state_style",['id'=>$item["id"],"column"=>'state','state'=>$item["state"]])@endcomponent
+                                                               
                                                             </td>
                                                             <td>
                                                                 @component($prefix_component."state_style",['id'=>$item["id"],"column"=>'state_main','state'=>$item["state_main"]])@endcomponent
@@ -53,10 +54,14 @@
                                                             <td>{{$item->date_convert('validity_date')}}</td>
                                                             <td>{{$item->date_convert()}}</td>
                                                             <td>
+                                                                @can("update_news")
                                                                 <a href="{{route("admin.news.edit",['news'=>$item['id']])}}" class="btn btn-success btn-sm"><i class="fas fa-edit"></i></a>
+                                                                @endcan
+                                                                @can("delete_news")
                                                                 <a href="javascript:void(0)" data-href="{{route("admin.news.destroy",['news'=>$item['id']])}}" class="btn btn-danger btn-sm delete">
                                                                     <i class="fas fa-trash"></i>
                                                                 </a>
+                                                                @endcan
                                                                 <a href="{{route("admin.content.create",['item_id'=>$item['id'],'module'=>'news'])}}" class="btn btn-primary btn-sm">افزودن محتوا
                                                                     <span
                                                                         class="badge badge-transparent">{{$item->content()->count()}}</span></a>
@@ -68,18 +73,18 @@
                                                 </table>
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <div class="col-5">
+                                                        @can("delete_news")
                                                         <button class="btn btn-danger btn-sm" type="submit"
                                                                 name="action_all" value="delete_all">حذف کلی
                                                         </button>
-                                                        <button class="btn btn-success btn-sm" type="submit"
-                                                                name="action_all" value="change_state">تفییر وضعیت
-                                                        </button>
-                                                        <button class="btn btn-primary btn-sm" type="submit"
-                                                                name="action_all" value="change_order">تفییر ترتیب
-                                                        </button>
-                                                        <br>
-                                                        <br>
-                                                        @component($prefix_component."state_type",['title'=>' صفحه اصلی','name'=>'state_main'])@endcomponent
+                                                        @endcan
+                                                        @can("read_news")
+                                                            <button class="btn btn-success btn-sm" type="submit" name="action_all" value="change_state">تفییر وضعیت </button>
+                                                            <button class="btn btn-primary btn-sm" type="submit" name="action_all" value="change_order">تفییر ترتیب </button>
+                                                            <br>
+                                                            <br>
+                                                            @component($prefix_component."state_type",['title'=>' صفحه اصلی','name'=>'state_main'])@endcomponent
+                                                        @endcan
                                                     </div>
                                                     <div class="col-7 d-flex justify-content-end">
                                                         {{$news->links()}}

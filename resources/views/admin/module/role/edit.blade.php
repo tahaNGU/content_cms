@@ -13,14 +13,16 @@
                             <h4>{{$module_name}}</h4>
                         </div>
                         <div class="card-body">
-                            @component($prefix_component."form",['action'=>route('admin.role.store'),'upload_file'=>true])
+                            @component($prefix_component."form",['action'=>route('admin.role.update',["role"=>$role["id"]])])
+                            @component($prefix_component."input_hidden",['value'=>$role['id']])@endcomponent
                                 @slot("content")
-                                @component($prefix_component."input",['name'=>'title','title'=>'عنوان','value'=>old('title'),'class'=>'w-50'])@endcomponent
-                                @error("permissions")
-                                <div class="text text-danger">{{$errors->first('permissions')}}</div>
-                               @enderror
+                                @method("put")
+                                @component($prefix_component."input",['name'=>'title','title'=>'عنوان','value'=>$role["title"],'class'=>'w-50'])@endcomponent
+                                    @error("permissions")
+                                    <div class="text text-danger">{{$errors->first('permissions')}}</div>
+                                    @enderror
                                     <div class="col-12 d-flex flex-wrap">
-                                      
+            
                                         @foreach($modules_permission as $key => $permissions)
                                         <div class="col-6">
                                             <div class="card">
@@ -33,7 +35,7 @@
                                                             @foreach($permissions as $key => $value)
                                                             <div class="form-check">
                                                                 <input class="form-check-input" value="{{$value}}" type="checkbox"
-                                                                       id="gridCheck{{$value}}" @if(!empty(old("permissions")))@if(in_array($value,old("permissions"))) checked @endif @endif name="permissions[]">
+                                                                       id="gridCheck{{$value}}" @if(in_array($value,$role->permission->pluck("id")->toArray())) checked @endif  name="permissions[]">
                                                                 <label class="form-check-label" for="gridCheck{{$value}}">
                                                                     {{$key}}
                                                                 </label>

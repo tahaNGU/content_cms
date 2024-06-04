@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\permissions;
 use Illuminate\Support\Facades\DB;
 
 if (!function_exists('sluggableCustomSlugMethod')) {
@@ -198,6 +199,12 @@ if (!function_exists('convert_to_timestamp')) {
     {
         $test = explode($separator, $date_persian);
         return (new \Morilog\Jalali\Jalalian(... $test))->getTimestamp();
+    }
+}
+
+if (!function_exists('permission_access')) {
+    function permission_access($module){
+        return permissions::where("module",$module)->get(["title","module"])->pluck("permission_kind")->toArray();
     }
 }
 

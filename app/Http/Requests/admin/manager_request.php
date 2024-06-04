@@ -24,18 +24,21 @@ class manager_request extends FormRequest
         $rules = [
             'fullname' => ['required', 'string', 'min:1', 'max:255'],
             'email' => ['required', 'email', 'min:1', 'max:255', 'unique:admins,email'],
-            'mobile' => ['required', 'min:1', 'max:20', 'unique:admins,mobile', 'regex:/[0]{1}[0-9]{10}/'],
+            'mobile' => ['required', 'min:1', 'max:20', 'unique:admins,mobile'],
             'province' => ['required', 'exists:provinces,id', 'integer'],
+            'role_id' => ['required','exists:roles,id','integer'],
             'city' => ['required', 'exists:cities,id', 'integer'],
             'pic' => ['nullable', 'mimes:jpeg,png,jpg', 'max:' . env('MAXIMUM_FILE')],
             'username' => ['required', 'string', 'min:1', 'max:255', 'unique:admins,username'],
             'password' => ['required', 'string', 'min:8', 'max:255', 'confirmed',]
 //            'password'=>['required','string','min:5','max:255','regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{5,}$/',]
         ];
+
+        // , 'regex:/[0]{1}[0-9]{10}/'
         if (isset($this->id)) {
             unset($rules["password"]);
             $rules["email"]=['required', 'email', 'min:1', 'max:255', 'unique:admins,email,'.$this->id];
-            $rules["mobile"]=['required', 'min:1', 'max:20', 'unique:admins,mobile,'.$this->id, 'regex:/[0]{1}[0-9]{10}/'];
+            $rules["mobile"]=['required', 'min:1', 'max:20', 'unique:admins,mobile,'.$this->id];
             $rules["username"]=['required', 'min:1', 'max:255', 'unique:admins,username,'.$this->id];
         }
 

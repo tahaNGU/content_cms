@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::dropIfExists("permission");
         Schema::create("permissions",function (Blueprint $table){
             $table->id();
-            $table->string("title")->unique();
+            $table->string("title");
             $table->string("module");
+            $table->unique(['title', 'module']);
             $table->softDeletes();
             $table->timestamps();
         });
@@ -26,12 +26,12 @@ return new class extends Migration
             $table->softDeletes();
             $table->timestamps();
         });
-        Schema::create("permission_role",function (Blueprint $table){
+        Schema::create("permissions_role",function (Blueprint $table){
             $table->bigIncrements('id');
             $table->unsignedBigInteger('role_id');
-            $table->unsignedBigInteger('permission_id');
+            $table->unsignedBigInteger('permissions_id');
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
-            $table->foreign('permission_id')->references('id')->on('permissions')->onDelete('cascade');
+            $table->foreign('permissions_id')->references('id')->on('permissions')->onDelete('cascade');
         });
     }
 
@@ -42,6 +42,6 @@ return new class extends Migration
     {
         Schema::dropIfExists("permissions");
         Schema::dropIfExists("roles");
-        Schema::dropIfExists("permission_role");
+        Schema::dropIfExists("permissions_role");
     }
 };

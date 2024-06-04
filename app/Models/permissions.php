@@ -12,11 +12,16 @@ class permissions extends Model
 {
     use HasFactory,SoftDeletes;
     protected $fillable=["title","role"];
-    protected $appends=["title_fa"];
+    // protected $appends=["title_fa"];
+    protected $appends=["permission_kind","title_fa"];
+
 
     public function getTitleFaAttribute(){
-        $title= explode("-",$this->title);
-        return trans("modules.crud.".$title[0])." ".trans("modules.module_name.".$title[1]);
+        return trans("modules.crud.".$this->title)." ".trans("modules.module_name.".$this->module); 
+    }
+    
+    public function getPermissionKindAttribute(){
+        return $this->title."_".$this->module;
     }
 
 }
