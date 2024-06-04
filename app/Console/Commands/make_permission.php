@@ -28,7 +28,6 @@ class make_permission extends Command
     {
         $modules = trans('modules.module_name');
         $crud = array_keys(trans('modules.crud'));
-//        unset($modules["permission"]);
         foreach ($modules as $key => $module) {
             array_map(function ($item) use ($key) {
                 permissions::insertOrIgnore([
