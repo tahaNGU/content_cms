@@ -26,7 +26,6 @@ class AppServiceProvider extends ServiceProvider
             ]);
         });
         Paginator::useBootstrapFour();
-
         View::composer(["site.auth.user.change_profile"], function ($view) {
             $view->with([
                 'provinces' => province::all(),
@@ -49,7 +48,6 @@ class AppServiceProvider extends ServiceProvider
                 if ($admin["id"] == "1") {
                     return true;
                 }
-                // dd($admin->role->permission()->where("title", $permission["title"])->where("module", $permission["module"]));
                 return $admin->role->permission()->where("title", $permission["title"])->where("module", $permission["module"])->count();
             });
         });
