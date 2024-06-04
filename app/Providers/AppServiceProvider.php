@@ -26,7 +26,6 @@ class AppServiceProvider extends ServiceProvider
             ]);
         });
         Paginator::useBootstrapFour();
-
         View::composer(["site.auth.user.change_profile"], function ($view) {
             $view->with([
                 'provinces' => province::all(),
