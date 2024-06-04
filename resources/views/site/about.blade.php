@@ -1,4 +1,10 @@
 @extends("site.layout.base")
+
+
+
+
+
+
 @section('head')
     <link rel="stylesheet" href="{{asset('site/assets/css/pages/page-05.css')}}">
 @endsection
