@@ -118,47 +118,6 @@ if (!function_exists('to_english_numbers')) {
         return (int)$integer;
     }
 }
-
-
-//if (!function_exists('breadcrumb')) {
-//    function breadcrumb($model, $breadcrumb = '')
-//    {
-//        if (empty($breadcrumb)) {
-//            $breadcrumb .= "<li><a href='/main'>صفحه اصلی</a></li>";
-//        }
-//        dump($model->parent);
-//        if (isset($model->parent)) {
-//            $breadcrumb .= "<li><a href=''>" . $model->parent->title . "</a></li>";
-//
-//            breadcrumb($model->parent, $breadcrumb);
-//        }
-//        $breadcrumb .= "<li><a href=''>" . $model['title'] . "</a></li>";
-
-//        dd($breadcrumb);
-//        return $breadcrumb;
-//    }
-//}
-
-
-//public function check_mobile($attribute, $value, $parameters)
-//{
-//    $paramsPatternMap = [
-//        'zero_code'    => '/^(00989){1}[0-9]{9}+$/',
-//        'plus'         => '/^(\+989){1}[0-9]{9}+$/',
-//        'code'         => '/^(989){1}[0-9]{9}+$/',
-//        'zero'         => '/^(09){1}[0-9]{9}+$/',
-//        'without_zero' => '/^(9){1}[0-9]{9}+$/',
-//    ];
-//
-//    if (isset($parameters[0]) && in_array($parameters[0], array_keys($paramsPatternMap))) {
-//        return preg_match($paramsPatternMap[$parameters[0]], $value);
-//    }
-//
-//    return (preg_match('/^(((98)|(\+98)|(0098)|0)(9){1}[0-9]{9})+$/', $value) || preg_match('/^(9){1}[0-9]{9}+$/', $value))? true : false;
-//}
-
-//
-//
 if (!function_exists('check_mobile')) {
     function check_mobile($mobile)
     {
@@ -207,4 +166,3 @@ if (!function_exists('permission_access')) {
         return permissions::where("module",$module)->get(["title","module"])->pluck("permission_kind")->toArray();
     }
 }
-

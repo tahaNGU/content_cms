@@ -49,7 +49,6 @@ class AppServiceProvider extends ServiceProvider
                 if ($admin["id"] == "1") {
                     return true;
                 }
-                // dd($admin->role->permission()->where("title", $permission["title"])->where("module", $permission["module"]));
                 return $admin->role->permission()->where("title", $permission["title"])->where("module", $permission["module"])->count();
             });
         });
